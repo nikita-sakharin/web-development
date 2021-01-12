@@ -4,3 +4,5 @@ all:
 	source .venv/bin/activate
 	pip3 install -r requirements.txt
 	deactivate
+	cp -r static /var/www
+	/etc/init.d/nginx start -c nginx/nginx.conf

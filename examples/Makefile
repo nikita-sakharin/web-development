@@ -13,3 +13,11 @@ start-nginx:
 	cp -r static /var/www
 	/etc/init.d/nginx stop
 	/etc/init.d/nginx start
+
+wkr:
+	git clone https://github.com/wg/wrk.git wrk
+	cd wrk
+	make
+	sudo cp wrk /usr/local/bin
+	cd ..
+	rm -fr wrk

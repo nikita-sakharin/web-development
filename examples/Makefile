@@ -16,5 +16,5 @@ start-nginx:
 
 wkr:
 	rm -fr wrk
-	git clone https://github.com/wg/wrk.git wrk
-	make -С wrk
+	git clone https://github.com/wg/wrk.git wkr
+	make -C wrk

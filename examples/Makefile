@@ -18,3 +18,4 @@ install-wrk:
 	rm -fr wrk
 	git clone https://github.com/wg/wrk.git wrk
 	make -C wrk
+	cp wrk/wrk /usr/local/bin

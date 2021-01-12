@@ -10,5 +10,5 @@ python:
 
 start-nginx:
 	cp -r static /var/www
-	nginx -s stop
+	/etc/init.d/nginx stop
 	nginx -c $(shell pwd)/nginx/nginx.conf

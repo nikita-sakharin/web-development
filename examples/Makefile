@@ -10,4 +10,4 @@ python:
 
 start-nginx:
 	cp -r static /var/www
-	nginx -s reload -c $(pwd)/nginx/nginx.conf
+	nginx -s reload -c $(shell pwd)/nginx/nginx.conf

@@ -9,6 +9,7 @@ python:
 	pip3 install -r requirements.txt
 
 start-nginx:
+	cp nginx/nginx.conf /etc/nginx
 	cp -r static /var/www
 	/etc/init.d/nginx stop
-	nginx -c $(shell pwd)/nginx/nginx.conf
+	/etc/init.d/nginx start

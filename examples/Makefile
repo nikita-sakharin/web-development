@@ -15,6 +15,7 @@ start-nginx:
 	/etc/init.d/nginx start
 
 wkr:
+	rm -fr wrk
 	git clone https://github.com/wg/wrk.git wrk
 	cd wrk
 	make

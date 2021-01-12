@@ -1,7 +1,7 @@
 all: python
 
 install:
-	apt install nginx pycodestyle python3 python3-pip python3-venv
+	apt git install build-essential libssl-dev nginx pycodestyle python3 python3-pip python3-venv -y
 
 python:
 	python3 -m venv .venv

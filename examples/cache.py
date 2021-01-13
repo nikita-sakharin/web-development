@@ -7,7 +7,7 @@ class LRUCache:
     def __init__(self, capacity: int = 10) -> None:
         if not isinstance(capacity, int):
             raise TypeError("capacity must be int")
-        elif capacity <= 0:
+        if capacity <= 0:
             raise ValueError("capacity must be positive")
         self._capacity = capacity
         self._dict = dict()

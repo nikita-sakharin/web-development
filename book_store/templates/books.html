@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Books{% endblock %}
+
+{% block content %}
+<h1>Books available:</h1>
+
+{% for article in article_list %}
+    <p>{{ book.title }}</p>
+    <p>By {{ book.author }}</p>
+    <p>Published {{ book.year }}</p>
+    <p>${{ book.price }}</p>
+    <p>link to book {{ book.id }}</p>
+{% endfor %}
+{% endblock %}

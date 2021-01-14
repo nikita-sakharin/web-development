@@ -1,0 +1,16 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>{% block title %}{% endblock %}</title>
+  </head>
+  <body>
+    <h1 align="center">
+      <img alt="Logo" src="{% static "images/logo.png" %}" width="40" height="40"/>
+      Welcome to book-store!
+    </h1>
+    {% block content %}{% endblock %}
+    <center><i>Powered by Django</i></center>
+  </body>
+</html>

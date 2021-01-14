@@ -5,7 +5,7 @@
 {% block content %}
 <h1>Books available:</h1>
 
-{% for article in article_list %}
+{% for book in books %}
     <p>{{ book.title }}</p>
     <p>By {{ book.author }}</p>
     <p>Published {{ book.year }}</p>

@@ -18,6 +18,6 @@ from django.urls import include, path
 from . import views
 
 urlpatterns = [
-    path('book/<int:id>', views.book_detail, name='book_detail')
+    path('book/<int:id>', views.book_detail, name='book_detail'),
     path('books', views.books, name='books'),
 ]

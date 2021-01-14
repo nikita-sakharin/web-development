@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-def book_detail(request, book_id):
+def book_detail(request, id):
     '''
     try:
         book = Book.objects.get(id=book_id)

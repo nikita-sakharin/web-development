@@ -21,3 +21,7 @@ urlpatterns = [
     path('book/<int:book_id>', views.book_detail, name='book_detail'),
     path('books', views.books, name='books'),
 ]
+# TODO декоратор
+# POST - добавление update.
+# PUT добавление
+# всё в виде json!!!!

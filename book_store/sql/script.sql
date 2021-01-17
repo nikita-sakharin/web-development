@@ -12,9 +12,10 @@ CREATE TABLE book(
     title VARCHAR(255) NOT NULL,
     year DATE NOT NULL,
     isbn CHAR(13) NOT NULL,
-    price l NOT NULL,
+    price MONEY NOT NULL,
     PRIMARY KEY(id),
-    UNIQUE(isbn),
+    CHECK(DATE_TRUNC('year', year) = year AND year < current_date),
+    UNIQUE(isbn)
 );
 
 CREATE TABLE author(

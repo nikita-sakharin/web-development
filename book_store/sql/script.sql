@@ -23,11 +23,12 @@ CREATE TABLE book(
 
 CREATE TABLE author(
     id BIGSERIAL NOT NULL,
-    name BIGSERIAL NOT NULL,
-    birthdate DATE NOT NULL,
-    deathdate DATE DEFAULT '9999-31-12',
+    full_name VARCHAR(255) NOT NULL,
+    birth_date DATE NOT NULL,
+    death_date DATE NOT NULL DEFAULT '9999-12-31',
     PRIMARY KEY(id),
-    UNIQUE(name, birthdate)
+    -- full_name is not UNIQUE
+    UNIQUE(full_name, birth_date)
 );
 
 CREATE TABLE written_by(
@@ -40,7 +41,7 @@ CREATE TABLE genre(
     id BIGSERIAL NOT NULL,
     name VARCHAR(255) NOT NULL,
     PRIMARY KEY(id),
-    UNIQUE(name),
+    UNIQUE(name)
 );
 
 CREATE TABLE belongs_to(

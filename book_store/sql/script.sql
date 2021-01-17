@@ -14,8 +14,11 @@ CREATE TABLE book(
     isbn CHAR(13) NOT NULL,
     price MONEY NOT NULL,
     PRIMARY KEY(id),
-    CHECK(DATE_TRUNC('year', year) = year AND year < current_date),
-    UNIQUE(isbn)
+    -- title is not UNIQUE
+    UNIQUE(isbn),
+    CHECK(year = DATE_TRUNC('year', year) AND year < current_date),
+    CHECK(isbn SIMILAR TO '\d{13}'),
+    CHECK(price > 0)
 );
 
 CREATE TABLE author(

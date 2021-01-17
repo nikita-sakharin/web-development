@@ -31,9 +31,11 @@ CREATE TABLE author(
     UNIQUE(full_name, birth_date)
 );
 
-CREATE TABLE written_by(
+CREATE TABLE book_author(
     book_id BIGINT NOT NULL,
     author_id BIGINT NOT NULL,
+    FOREIGN KEY(book_id) REFERENCES book(id),
+    FOREIGN KEY(author_id) REFERENCES author(id),
     UNIQUE(book_id, author_id)
 );
 
@@ -44,8 +46,10 @@ CREATE TABLE genre(
     UNIQUE(name)
 );
 
-CREATE TABLE belongs_to(
+CREATE TABLE book_genre(
     book_id BIGINT NOT NULL,
     genre_id BIGINT NOT NULL,
+    FOREIGN KEY(book_id) REFERENCES book(id),
+    FOREIGN KEY(genre_id) REFERENCES genre(id),
     UNIQUE(book_id, genre_id)
 );

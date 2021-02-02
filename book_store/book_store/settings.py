@@ -78,6 +78,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'book_store_database',
+        # Just for examples. Don't save user and password in git.
         'USER': 'book_store_user',
         'PASSWORD': 'IX#xZ&5kojzu!*hQyVRo',
         'HOST': '127.0.0.1',

@@ -84,7 +84,7 @@ INSERT INTO book_author(book_id, author_id) VALUES
     (3, 3),
     (4, 1),
     (5, 2),
-    (6, 4);
+    (6, 4),
     (7, 1);
 
 INSERT INTO genre(name) VALUES

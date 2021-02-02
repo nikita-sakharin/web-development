@@ -10,7 +10,7 @@ CREATE DATABASE book_store_database WITH
 
 -- psql -d 'book_store_database' -U 'book_store_user'
 CREATE TABLE book(
-    id BIGSERIAL NOT NULL,
+    id SERIAL NOT NULL,
     title VARCHAR(255) NOT NULL,
     year DATE NOT NULL,
     isbn CHAR(13) NOT NULL,
@@ -24,7 +24,7 @@ CREATE TABLE book(
 );
 
 CREATE TABLE author(
-    id BIGSERIAL NOT NULL,
+    id SERIAL NOT NULL,
     full_name VARCHAR(255) NOT NULL,
     birth_date DATE NOT NULL,
     death_date DATE NOT NULL DEFAULT '9999-12-31',
@@ -34,23 +34,23 @@ CREATE TABLE author(
 );
 
 CREATE TABLE book_author(
-    book_id BIGINT NOT NULL,
-    author_id BIGINT NOT NULL,
+    book_id INT NOT NULL,
+    author_id INT NOT NULL,
     FOREIGN KEY(book_id) REFERENCES book(id),
     FOREIGN KEY(author_id) REFERENCES author(id),
     UNIQUE(book_id, author_id)
 );
 
 CREATE TABLE genre(
-    id BIGSERIAL NOT NULL,
+    id SERIAL NOT NULL,
     name VARCHAR(255) NOT NULL,
     PRIMARY KEY(id),
     UNIQUE(name)
 );
 
 CREATE TABLE book_genre(
-    book_id BIGINT NOT NULL,
-    genre_id BIGINT NOT NULL,
+    book_id INT NOT NULL,
+    genre_id INT NOT NULL,
     FOREIGN KEY(book_id) REFERENCES book(id),
     FOREIGN KEY(genre_id) REFERENCES genre(id),
     UNIQUE(book_id, genre_id)

@@ -53,3 +53,18 @@ CREATE TABLE book_genre(
     FOREIGN KEY(genre_id) REFERENCES genre(id),
     UNIQUE(book_id, genre_id)
 );
+
+INSERT INTO author(full_name, birth_date, death_date) VALUES
+    ('Александр Сергеевич Пушкин', '1799-06-06', '1837-02-10'),
+    ('Григорий Михайлович Фихтенгольц', '1888-06-05', '1959-06-26'),
+    ('Фёдор Михайлович Достоевский', '1821-11-11', '1881-02-09');
+INSERT INTO author(full_name, birth_date) VALUES
+    ('Клиффорд Штайн', '1965-12-14'),
+    ('Рональд Линн Ривест', '1947-01-01'),
+    ('Томас Х. Кормен', '1956-01-01'),
+    ('Чарльз Эрик Лейзерсон', '1953-11-10');
+
+INSERT INTO genre(name) VALUES
+    ('Компьютерные науки'),
+    ('Математика'),
+    ('Роман');

@@ -13,8 +13,21 @@ class Book(models.Model):
     class Meta:
         db_table = "book"
         constraints = [
-            models.CheckConstraint(check=~Q(title='')),
+            models.CheckConstraint(check=~Q(title=''), name='book_title_check'),
+            models.CheckConstraint(check=Q(year=''), name='book_title_check'),
+            pub_date__year=2005
         ]
+ndexes:
+    "book_pkey" PRIMARY KEY, btree (id)
+    "book_isbn_key" UNIQUE CONSTRAINT, btree (isbn)
+Check constraints:
+    "book_isbn_check" CHECK (isbn ~ similar_escape('\d{13}'::text, NULL::text))
+    "book_price_check" CHECK (price > 0::money)
+    "book_title_check" CHECK (title::text <> ''::text)
+    "book_year_check" CHECK (year = date_trunc('year'::text, year::timestamp with time zone) AND year < CURRENT_DATE)
+Referenced by:
+    TABLE "book_author" CONSTRAINT "book_author_book_id_fkey" FOREIGN KEY (book_id) REFERENCES book(id)
+    TABLE "book_genre" CONSTRAINT "book_genre_book_id_fkey" FOREIGN KEY (book_id) REFERENCES book(id)
 """
 class Author(models.Model):
     fullName = models.CharField(255, null=False, db_column='full_name')

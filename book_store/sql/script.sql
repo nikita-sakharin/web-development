@@ -12,14 +12,14 @@ CREATE DATABASE book_store_database WITH
 CREATE TABLE book(
     id SERIAL NOT NULL,
     title VARCHAR(255) NOT NULL,
-    year DATE NOT NULL,
+    pub_year DATE NOT NULL,
     isbn CHAR(13) NOT NULL,
     price MONEY NOT NULL,
     PRIMARY KEY(id),
     -- title is not UNIQUE
     UNIQUE(isbn),
     CHECK(title <> ''),
-    CHECK(year = DATE_TRUNC('year', year) AND year < current_date),
+    CHECK(pub_year = DATE_TRUNC('year', pub_year) AND pub_year < current_date),
     CHECK(isbn SIMILAR TO '\d{13}'),
     CHECK(price > CAST(0 AS MONEY))
 );
@@ -60,7 +60,7 @@ CREATE TABLE book_genre(
     UNIQUE(book_id, genre_id)
 );
 
-INSERT INTO book(title, year, isbn, price) VALUES
+INSERT INTO book(title, pub_year, isbn, price) VALUES
     ('Алгоритмы: построение и анализ', '1990-01-01', '9785845920164', 5500),
     ('Анна Каренина', '1875-01-01', '9785170878888', 222),
     ('Борис Годунов', '1831-01-01', '9785040978076', 136),

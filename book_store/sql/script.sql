@@ -18,6 +18,7 @@ CREATE TABLE book(
     PRIMARY KEY(id),
     -- title is not UNIQUE
     UNIQUE(isbn),
+    CHECK(title <> ''),
     CHECK(year = DATE_TRUNC('year', year) AND year < current_date),
     CHECK(isbn SIMILAR TO '\d{13}'),
     CHECK(price > CAST(0 AS MONEY))
@@ -47,7 +48,8 @@ CREATE TABLE genre(
     id SERIAL NOT NULL,
     name VARCHAR(255) NOT NULL,
     PRIMARY KEY(id),
-    UNIQUE(name)
+    UNIQUE(name),
+    CHECK(name <> '')
 );
 
 CREATE TABLE book_genre(

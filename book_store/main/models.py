@@ -39,7 +39,7 @@ class Author(Model):
             UniqueConstraint(fields=['full_name', 'birth_date'],
                 name='author_full_name_birth_date_key'),
             CheckConstraint(
-                check=Q(isbn__regex=r'\w{2,} (\w{1,2}\. |\w{2,} )?\w{2,}'),
+                check=Q(full_name__regex=r'\w{2,} (\w{1,2}\. |\w{2,} )?\w{2,}'),
                 name='author_full_name_check')
         ]
 """

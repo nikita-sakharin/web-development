@@ -1,5 +1,5 @@
 from django.db.models import (CharField, CheckConstraint, DateField,
-    DecimalField, F, Model, Q)
+    DecimalField, F, Model, Q, UniqueConstraint)
 from django.db.models.functions import Now
 
 class Book(Model):

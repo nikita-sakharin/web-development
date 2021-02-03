@@ -31,7 +31,7 @@ CREATE TABLE author(
     PRIMARY KEY(id),
     -- full_name is not UNIQUE
     UNIQUE(full_name, birth_date),
-    CHECK(full_name SIMILAR TO '\w{2,} (\w{,2}\.|\w{2,} )?\w{2,}'),
+    CHECK(full_name SIMILAR TO '\w{2,} (\w{1,2}\. |\w{2,} )?\w{2,}'),
     CHECK(birth_date < death_date)
 );
 

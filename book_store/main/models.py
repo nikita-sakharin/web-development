@@ -45,6 +45,16 @@ class Author(Model):
                 check=Q(birth_date__lt=F('death_date')),
                 name='author_check'),
         ]
+
+class Genre(Model):
+    name = CharField(max_length=255, null=False, db_column='name', unique=True,
+        verbose_name='Название жанра')
+
+    class Meta:
+        db_table = 'genre'
+        constraints = [
+            CheckConstraint(check=~Q(name=''), name='genre_name_check'),
+        ]
 """
 class BookAuthor(Model):
     book = ForeignKey(Book, DO_NOTHING)
@@ -64,12 +74,4 @@ class BookGenre(Model):
         managed = False
         db_table = 'book_genre'
         unique_together = (('book', 'genre'),)
-
-
-class Genre(Model):
-    name = CharField(unique=True, max_length=255)
-
-    class Meta:
-        managed = False
-        db_table = 'genre'
 """

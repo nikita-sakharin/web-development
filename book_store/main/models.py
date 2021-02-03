@@ -17,7 +17,7 @@ class Book(Model):
         constraints = [
             CheckConstraint(check=~Q(title=''), name='book_title_check'),
             CheckConstraint(
-                check=Q(pub_year__year=F('pub_year'), pub_year__le=Now()),
+                check=Q(pub_year__year=F('pub_year'), pub_year__lt=Now()),
                 name='book_pub_year_check'),
             CheckConstraint(check=Q(isbn__regex=r'\d{13}'),
                 name='book_isbn_check'),

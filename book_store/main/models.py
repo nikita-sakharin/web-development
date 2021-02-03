@@ -43,7 +43,7 @@ class Author(Model):
                 name='author_full_name_check'),
             CheckConstraint(
                 check=Q(birth_date__lt=F('death_date')),
-                name='author_full_name_check'),
+                name='author_check'),
         ]
 """
 class BookAuthor(Model):

@@ -30,7 +30,9 @@ CREATE TABLE author(
     death_date DATE NOT NULL DEFAULT '9999-12-31',
     PRIMARY KEY(id),
     -- full_name is not UNIQUE
-    UNIQUE(full_name, birth_date)
+    UNIQUE(full_name, birth_date),
+    CHECK(full_name SIMILAR TO '\\w{2,} (\\w{,2}\\.|\\w{2,})? \\w{2,}'),
+    CHECK(birth_date < death_date)
 );
 
 CREATE TABLE book_author(

@@ -1,6 +1,6 @@
 from django.db.models import (CharField, CheckConstraint, DateField,
     DecimalField, F, Model, Q, UniqueConstraint)
-from django.db.models.functions import Now
+from django.db.models.functions import Now, Trunc
 
 class Book(Model):
     title = CharField(max_length=255, null=False, db_column='title',
@@ -17,7 +17,7 @@ class Book(Model):
         constraints = [
             CheckConstraint(check=~Q(title=''), name='book_title_check'),
             CheckConstraint(
-                check=Q(pub_year__year=F('pub_year'), pub_year__lt=Now()),
+                check=Q(pub_year=Trunc('pub_year', 'year', output_field=DateField()), pub_year__lt=Now()),
                 name='book_pub_year_check'),
             CheckConstraint(check=Q(isbn__regex=r'\d{13}'),
                 name='book_isbn_check'),

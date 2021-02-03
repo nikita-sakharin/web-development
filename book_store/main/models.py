@@ -17,49 +17,32 @@ class Book(Model):
         constraints = [
             CheckConstraint(check=~Q(title=''), name='book_title_check'),
             CheckConstraint(
-                check=Q(pub_year=Trunc('pub_year', 'year', output_field=DateField()), pub_year__lt=Now()),
+                check=Q(pub_year=Trunc('pub_year', 'year',
+                    output_field=DateField()), pub_year__lt=Now()),
                 name='book_pub_year_check'),
             CheckConstraint(check=Q(isbn__regex=r'\d{13}'),
                 name='book_isbn_check'),
             CheckConstraint(check=Q(price__gt=0), name='book_price_check'),
         ]
-"""
+
 class Author(Model):
-    fullName = CharField(255, null=False, db_column='full_name')
-    birthDate = DateField(db_column='birth_date')
-    deathDate = DateField(null=False, db_column='death_date',
-        default='9999-12-31')
+    full_name = CharField(max_length=255, null=False, db_column='full_name',
+        verbose_name='Полное имя автора')
+    birth_date = DateField(null=False, db_column='birth_date',
+        verbose_name='Дата рождения')
+    death_date = DateField(null=False, db_column='death_date',
+        default='9999-12-31', verbose_name='Дата сметри')
 
     class Meta:
         db_table = "author"
-        managed = False
         constraints = [
-        CheckConstraint(check=~Q(team_home=F('team_visitors')), name='team_home_and_team_visitors_can_not_be_equal')
-            UniqueConstraint(fields=['full_name', 'birth_date'], name='')
+            UniqueConstraint(fields=['full_name', 'birth_date'],
+                name='author_full_name_birth_date_key'),
+            CheckConstraint(
+                check=Q(isbn__regex=r'\w{2,} (\w{1,2}\. |\w{2,} )?\w{2,}'),
+                name='author_full_name_check')
         ]
-
-class Author(Model):
-    full_name = CharField(max_length=255)
-    birth_date = DateField()
-    death_date = DateField()
-
-    class Meta:
-        managed = False
-        db_table = 'author'
-        unique_together = (('full_name', 'birth_date'),)
-
-
-class Book(Model):
-    title = CharField(max_length=255)
-    year = DateField()
-    isbn = CharField(unique=True, max_length=13)
-    price = TextField()  # This field type is a guess.
-
-    class Meta:
-        managed = False
-        db_table = 'book'
-
-
+"""
 class BookAuthor(Model):
     book = ForeignKey(Book, DO_NOTHING)
     author = ForeignKey(Author, DO_NOTHING)

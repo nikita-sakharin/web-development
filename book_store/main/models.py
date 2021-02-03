@@ -1,5 +1,5 @@
 from django.db.models import (CharField, CheckConstraint, DateField,
-    DecimalField, Model, Q, UniqueConstraint)
+    DecimalField, F, Model, Q, UniqueConstraint)
 from django.db.models.functions import Now, Trunc
 
 class Book(Model):
@@ -42,7 +42,7 @@ class Author(Model):
                 check=Q(full_name__regex=r'\w{2,} (\w{1,2}\. |\w{2,} )?\w{2,}'),
                 name='author_full_name_check'),
             CheckConstraint(
-                check=Q(birth_date__lt='death_date'),
+                check=Q(birth_date__lt=F('death_date')),
                 name='author_full_name_check'),
         ]
 """

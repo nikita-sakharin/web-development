@@ -12,6 +12,9 @@ class Book(models.Model):
 
     class Meta:
         db_table = "book"
+        constraints = [
+            models.CheckConstraint(check=~Q(title='')),
+        ]
 """
 class Author(models.Model):
     fullName = models.CharField(255, null=False, db_column='full_name')
@@ -23,6 +26,7 @@ class Author(models.Model):
         db_table = "author"
         managed = False
         constraints = [
+        models.CheckConstraint(check=~Q(team_home=F('team_visitors')), name='team_home_and_team_visitors_can_not_be_equal')
             models.UniqueConstraint(fields=['full_name', 'birth_date'], name='')
         ]
 

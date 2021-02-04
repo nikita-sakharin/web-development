@@ -1,5 +1,7 @@
 from django.shortcuts import render
 
+from main.models import Book
+
 def book_detail(request, book_id):
     try:
         book = Book.objects.get(id=book_id)

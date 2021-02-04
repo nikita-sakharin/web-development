@@ -1,5 +1,5 @@
 from django.db.models import (CharField, CheckConstraint, DateField,
-    DecimalField, F, Model, Q, UniqueConstraint)
+    DecimalField, F, ManyToManyField, Model, Q, UniqueConstraint)
 from django.db.models.functions import Now, Trunc
 
 class Book(Model):
@@ -11,8 +11,8 @@ class Book(Model):
         verbose_name='Международный стандартный номер книги')
     price = DecimalField(max_digits=19, decimal_places=2, null=False,
         db_column='price', verbose_name='Цена')
-    authors = models.ManyToManyField(Author)
-    genres = models.ManyToManyField(Genre)
+    authors = ManyToManyField(Author)
+    genres = ManyToManyField(Genre)
 
     class Meta:
         db_table = 'book'

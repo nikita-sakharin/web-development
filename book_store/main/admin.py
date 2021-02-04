@@ -19,7 +19,6 @@ site.register(Genre, GenreAdmin)
 """
 class BookAuthorAdmin(ModelAdmin):
     list_display = ('id', 'course_id_id', 'user_id_id')
-    pass
 
 site.register(BookAuthor, BookAuthorAdmin)
 """

@@ -12,8 +12,8 @@ class Author(Model):
 
     def __str__(self) -> str:
         if death_date == '9999-12-31':
-            return F'{full_name}: {birth_date}'
-        return F'{full_name}: {birth_date} - {death_date}'
+            return F'{self.full_name}: {self.birth_date}'
+        return F'{self.full_name}: {self.birth_date} - {self.death_date}'
 
     class Meta:
         db_table = 'author'
@@ -33,7 +33,7 @@ class Genre(Model):
         verbose_name='Название жанра')
 
     def __str__(self) -> str:
-        return name
+        return self.name
 
     class Meta:
         db_table = 'genre'
@@ -54,7 +54,7 @@ class Book(Model):
     genre = ManyToManyField(Genre)
 
     def __str__(self) -> str:
-        return F'{title}, {pub_year} - {isbn}'
+        return F'{self.title}, {self.pub_year} - {self.isbn}'
 
     class Meta:
         db_table = 'book'

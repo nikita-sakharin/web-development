@@ -1,6 +1,7 @@
 from django.db.models import (CharField, CheckConstraint, DateField,
     DecimalField, F, ManyToManyField, Model, Q, UniqueConstraint)
 from django.db.models.functions import Now, Trunc
+
 class Author(Model):
     full_name = CharField(max_length=255, null=False, db_column='full_name',
         verbose_name='Полное имя автора')

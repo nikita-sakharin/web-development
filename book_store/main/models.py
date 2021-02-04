@@ -54,7 +54,7 @@ class Book(Model):
     genre = ManyToManyField(Genre)
 
     def __str__(self) -> str:
-        return F'{self.title}, {self.pub_year} - {self.isbn}'
+        return F'{self.title}, {self.pub_year} {type(self.pub_year)} - {self.isbn}'
 
     class Meta:
         db_table = 'book'

@@ -16,9 +16,10 @@ class GenreAdmin(ModelAdmin):
     list_display = ('id', 'name')
 
 site.register(Genre, GenreAdmin)
-
-class UserCourseAdmin(ModelAdmin):
+"""
+class BookAuthorAdmin(ModelAdmin):
     list_display = ('id', 'course_id_id', 'user_id_id')
     pass
 
-site.register(UserCourse, UserCourseAdmin)
+site.register(BookAuthor, BookAuthorAdmin)
+"""

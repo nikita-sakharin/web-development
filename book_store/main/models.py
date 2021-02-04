@@ -66,6 +66,7 @@ class BookAuthor(Model):
         managed = False
         db_table = 'book_author'
         unique_together = (('book', 'author'),)
+
 class BookGenre(Model):
     book = ForeignKey(Book, DO_NOTHING)
     genre = ForeignKey('Genre', DO_NOTHING)

@@ -1,5 +1,5 @@
 from django.contrib.admin import ModelAdmin
-"""
+
 from main.models import Author, Book, Genre
 
 class AuthorAdmin(ModelAdmin):
@@ -22,4 +22,3 @@ class UserCourseAdmin(ModelAdmin):
     pass
 
 admin.site.register(UserCourse, UserCourseAdmin)
-"""

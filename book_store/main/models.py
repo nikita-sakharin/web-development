@@ -13,7 +13,7 @@ class Book(Model):
         db_column='price', verbose_name='Цена')
 
     class Meta:
-        db_table = "book"
+        db_table = 'book'
         constraints = [
             UniqueConstraint(fields=['title', 'pub_year'],
                 name='book_title_pub_year_key'),
@@ -36,7 +36,7 @@ class Author(Model):
         default='9999-12-31', verbose_name='Дата сметри')
 
     class Meta:
-        db_table = "author"
+        db_table = 'author'
         constraints = [
             UniqueConstraint(fields=['full_name', 'birth_date'],
                 name='author_full_name_birth_date_key'),

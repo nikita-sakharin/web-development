@@ -7,7 +7,7 @@
 
 {% for book in books %}
     <p>{{ book.title }}</p>
-    <p>By {% for author in book.author.all %}{{ book.author }}{% endfor %}</p>
+    <p>By {% for author in book.author.all %}{{ author.full_name }} {% endfor %}</p>
     <p>Published {{ book.year }}</p>
     <p>${{ book.price }}</p>
     <p>link to book {{ book.id }}</p>

@@ -10,7 +10,7 @@ class Author(Model):
     death_date = DateField(null=False, db_column='death_date',
         default='9999-12-31', verbose_name='Дата сметри')
 
-    def __str__() -> str:
+    def __str__(self) -> str:
         if death_date == '9999-12-31':
             return F'{full_name}: {birth_date}'
         return F'{full_name}: {birth_date} - {death_date}'
@@ -32,7 +32,7 @@ class Genre(Model):
     name = CharField(max_length=255, null=False, db_column='name', unique=True,
         verbose_name='Название жанра')
 
-    def __str__() -> str:
+    def __str__(self) -> str:
         return name
 
     class Meta:
@@ -53,7 +53,7 @@ class Book(Model):
     author = ManyToManyField(Author)
     genre = ManyToManyField(Genre)
 
-    def __str__() -> str:
+    def __str__(self) -> str:
         return F'{title}, {pub_year} - {isbn}'
 
     class Meta:

@@ -7,9 +7,10 @@
 
 {% for book in books %}
     <p>{{ book.title }}</p>
-    <p>By {% for author in book.author.all %}{{ author.full_name }} {% endfor %}</p>
-    <p>Published {{ book.year }}</p>
-    <p>${{ book.price }}</p>
+    <p>Автор {% for author in book.author.all %}{{ author.full_name }} {% endfor %}</p>
+    <p>Год выпуска {{ book.pub_year.year }}</p>
+    <p>ISBN: {{ book.isbn }}</p>
+    <p>{{ book.price }}₽</p>
     <p>link to book {{ book.id }}</p>
 {% endfor %}
 {% endblock %}

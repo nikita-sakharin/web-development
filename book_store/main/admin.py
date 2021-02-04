@@ -1,5 +1,4 @@
-from django.contrib import admin
-from admin import ModelAdmin
+from django.contrib.admin import ModelAdmin, site
 
 from main.models import Author, Book, Genre
 

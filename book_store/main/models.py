@@ -42,8 +42,8 @@ class Book(Model):
         verbose_name='Международный стандартный номер книги')
     price = DecimalField(max_digits=19, decimal_places=2, null=False,
         db_column='price', verbose_name='Цена')
-    authors = ManyToManyField(Author)
-    genres = ManyToManyField(Genre)
+    author = ManyToManyField(Author)
+    genre = ManyToManyField(Genre)
 
     class Meta:
         db_table = 'book'

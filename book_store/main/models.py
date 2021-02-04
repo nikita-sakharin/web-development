@@ -11,7 +11,7 @@ class Author(Model):
         default='9999-12-31', verbose_name='Дата сметри')
 
     def __str__(self) -> str:
-        if self.death_date == '9999-12-31':
+        if str(self.death_date) == '9999-12-31':
             return F'{self.full_name}: {self.birth_date}'
         return F'{self.full_name}: {self.birth_date} - {self.death_date}'
 

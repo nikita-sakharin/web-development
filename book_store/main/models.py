@@ -15,6 +15,8 @@ class Book(Model):
     class Meta:
         db_table = "book"
         constraints = [
+            UniqueConstraint(fields=['title', 'pub_year'],
+                name='book_title_pub_year_key'),
             CheckConstraint(check=~Q(title=''), name='book_title_check'),
             CheckConstraint(
                 check=Q(pub_year=Trunc('pub_year', 'year',
@@ -64,8 +66,6 @@ class BookAuthor(Model):
         managed = False
         db_table = 'book_author'
         unique_together = (('book', 'author'),)
-
-
 class BookGenre(Model):
     book = ForeignKey(Book, DO_NOTHING)
     genre = ForeignKey('Genre', DO_NOTHING)

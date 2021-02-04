@@ -17,6 +17,7 @@ CREATE TABLE book(
     price MONEY NOT NULL,
     PRIMARY KEY(id),
     -- title is not UNIQUE
+    UNIQUE(title, pub_year),
     UNIQUE(isbn),
     CHECK(title <> ''),
     CHECK(pub_year = DATE_TRUNC('year', pub_year) AND pub_year < current_date),

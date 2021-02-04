@@ -2,33 +2,6 @@ from django.db.models import (CharField, CheckConstraint, DateField,
     DecimalField, F, ManyToManyField, Model, Q, UniqueConstraint)
 from django.db.models.functions import Now, Trunc
 
-class Book(Model):
-    title = CharField(max_length=255, null=False, db_column='title',
-        verbose_name='Заглавие книги')
-    pub_year = DateField(null=False, db_column='pub_year',
-        verbose_name='Год публикации')
-    isbn = CharField(max_length=13, null=False, db_column='isbn', unique=True,
-        verbose_name='Международный стандартный номер книги')
-    price = DecimalField(max_digits=19, decimal_places=2, null=False,
-        db_column='price', verbose_name='Цена')
-    authors = ManyToManyField(Author)
-    genres = ManyToManyField(Genre)
-
-    class Meta:
-        db_table = 'book'
-        constraints = [
-            UniqueConstraint(fields=['title', 'pub_year'],
-                name='book_title_pub_year_key'),
-            CheckConstraint(check=~Q(title=''), name='book_title_check'),
-            CheckConstraint(
-                check=Q(pub_year=Trunc('pub_year', 'year',
-                    output_field=DateField()), pub_year__lt=Now()),
-                name='book_pub_year_check'),
-            CheckConstraint(check=Q(isbn__regex=r'\d{13}'),
-                name='book_isbn_check'),
-            CheckConstraint(check=Q(price__gt=0), name='book_price_check'),
-        ]
-
 class Author(Model):
     full_name = CharField(max_length=255, null=False, db_column='full_name',
         verbose_name='Полное имя автора')
@@ -59,22 +32,30 @@ class Genre(Model):
         constraints = [
             CheckConstraint(check=~Q(name=''), name='genre_name_check'),
         ]
-"""
-class BookAuthor(Model):
-    book = ForeignKey(Book, DO_NOTHING)
-    author = ForeignKey(Author, DO_NOTHING)
+
+class Book(Model):
+    title = CharField(max_length=255, null=False, db_column='title',
+        verbose_name='Заглавие книги')
+    pub_year = DateField(null=False, db_column='pub_year',
+        verbose_name='Год публикации')
+    isbn = CharField(max_length=13, null=False, db_column='isbn', unique=True,
+        verbose_name='Международный стандартный номер книги')
+    price = DecimalField(max_digits=19, decimal_places=2, null=False,
+        db_column='price', verbose_name='Цена')
+    authors = ManyToManyField(Author)
+    genres = ManyToManyField(Genre)
 
     class Meta:
-        managed = False
-        db_table = 'book_author'
-        unique_together = (('book', 'author'),)
-
-class BookGenre(Model):
-    book = ForeignKey(Book, DO_NOTHING)
-    genre = ForeignKey('Genre', DO_NOTHING)
-
-    class Meta:
-        managed = False
-        db_table = 'book_genre'
-        unique_together = (('book', 'genre'),)
-"""
+        db_table = 'book'
+        constraints = [
+            UniqueConstraint(fields=['title', 'pub_year'],
+                name='book_title_pub_year_key'),
+            CheckConstraint(check=~Q(title=''), name='book_title_check'),
+            CheckConstraint(
+                check=Q(pub_year=Trunc('pub_year', 'year',
+                    output_field=DateField()), pub_year__lt=Now()),
+                name='book_pub_year_check'),
+            CheckConstraint(check=Q(isbn__regex=r'\d{13}'),
+                name='book_isbn_check'),
+            CheckConstraint(check=Q(price__gt=0), name='book_price_check'),
+        ]

@@ -1,4 +1,4 @@
-from django.contrib.admin import ModelAdmin, site
+from django.contrib.admin import ModelAdmin, TabularInline, site
 
 from main.models import Author, Book, Genre
 

@@ -50,8 +50,8 @@ class Book(Model):
         verbose_name='Международный стандартный номер книги')
     price = DecimalField(max_digits=19, decimal_places=2, null=False,
         db_column='price', verbose_name='Цена')
-    author = ManyToManyField(Author)
-    genre = ManyToManyField(Genre)
+    authors = ManyToManyField(Author)
+    genres = ManyToManyField(Genre)
 
     def __str__(self) -> str:
         return F'{self.title}, {self.pub_year.year} - {self.isbn}'
@@ -107,22 +107,22 @@ Book(title='Курс дифференциального и интегральн�
 Book(title='Преступление и наказание', pub_year='1866-01-01',
     isbn='9785170906307', price=176).save()
 
-Book.objects.get(id=1).author.add(5)
-Book.objects.get(id=1).author.add(6)
-Book.objects.get(id=1).author.add(7)
-Book.objects.get(id=1).author.add(8)
-Book.objects.get(id=2).author.add(3)
-Book.objects.get(id=3).author.add(1)
-Book.objects.get(id=4).author.add(3)
-Book.objects.get(id=5).author.add(1)
-Book.objects.get(id=6).author.add(2)
-Book.objects.get(id=7).author.add(4)
+Book.objects.get(id=1).authors.add(5)
+Book.objects.get(id=1).authors.add(6)
+Book.objects.get(id=1).authors.add(7)
+Book.objects.get(id=1).authors.add(8)
+Book.objects.get(id=2).authors.add(3)
+Book.objects.get(id=3).authors.add(1)
+Book.objects.get(id=4).authors.add(3)
+Book.objects.get(id=5).authors.add(1)
+Book.objects.get(id=6).authors.add(2)
+Book.objects.get(id=7).authors.add(4)
 
-Book.objects.get(id=1).genre.add(2)
-Book.objects.get(id=2).genre.add(4)
-Book.objects.get(id=3).genre.add(1)
-Book.objects.get(id=4).genre.add(4)
-Book.objects.get(id=5).genre.add(4)
-Book.objects.get(id=6).genre.add(3)
-Book.objects.get(id=7).genre.add(4)
+Book.objects.get(id=1).genres.add(2)
+Book.objects.get(id=2).genres.add(4)
+Book.objects.get(id=3).genres.add(1)
+Book.objects.get(id=4).genres.add(4)
+Book.objects.get(id=5).genres.add(4)
+Book.objects.get(id=6).genres.add(3)
+Book.objects.get(id=7).genres.add(4)
 """

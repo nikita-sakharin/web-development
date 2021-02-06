@@ -9,7 +9,7 @@ class AuthorAdmin(ModelAdmin):
 site.register(Author, AuthorAdmin)
 
 class BookAdmin(ModelAdmin):
-    list_display = ('id', 'title', 'pub_year')
+    list_display = ('id', 'title', 'pub_year', 'author')
     list_filter = ('title', 'pub_year', 'isbn', 'price')
 
 site.register(Book, BookAdmin)

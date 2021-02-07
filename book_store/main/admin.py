@@ -14,24 +14,25 @@ class AuthorAdmin(ModelAdmin):
 
 site.register(Author, AuthorAdmin)
 
+class BookGenresInline(TabularInline):
+    model = Book.genres.through
+
+class GenreAdmin(ModelAdmin):
+    list_display = ('id', 'name')
+    list_filter = ('name',)
+    inlines = [
+        BookGenresInline,
+    ]
+
+site.register(Genre, GenreAdmin)
+
 class BookAdmin(ModelAdmin):
     list_display = ('id', 'title', 'pub_year')
     list_filter = ('title', 'pub_year', 'isbn', 'price')
     inlines = [
         BookAuthorsInline,
+        BookGenresInline,
     ]
-    exclude = ('authors',)
+    exclude = ('authors', 'genres')
 
 site.register(Book, BookAdmin)
-
-class GenreAdmin(ModelAdmin):
-    list_display = ('id', 'name')
-    list_filter = ('name',)
-
-site.register(Genre, GenreAdmin)
-"""
-class BookAuthorAdmin(ModelAdmin):
-    list_display = ('id', 'course_id_id', 'user_id_id')
-
-site.register(BookAuthor, BookAuthorAdmin)
-"""

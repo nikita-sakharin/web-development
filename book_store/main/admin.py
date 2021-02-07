@@ -1,4 +1,4 @@
-from django.contrib.admin import ModelAdmin, site
+from django.contrib.admin import ModelAdmin, TabularInline, site
 
 from main.models import Author, Book, Genre
 
@@ -8,20 +8,25 @@ class AuthorAdmin(ModelAdmin):
 
 site.register(Author, AuthorAdmin)
 
-class BookAdmin(ModelAdmin):
-    list_display = ('id', 'title', 'pub_year')
-    list_filter = ('title', 'pub_year', 'isbn', 'price')
-
-site.register(Book, BookAdmin)
-
 class GenreAdmin(ModelAdmin):
     list_display = ('id', 'name')
     list_filter = ('name',)
 
 site.register(Genre, GenreAdmin)
-"""
-class BookAuthorAdmin(ModelAdmin):
-    list_display = ('id', 'course_id_id', 'user_id_id')
 
-site.register(BookAuthor, BookAuthorAdmin)
-"""
+class BookAuthorsInline(TabularInline):
+    model = Book.authors.through
+
+class BookGenresInline(TabularInline):
+    model = Book.genres.through
+
+class BookAdmin(ModelAdmin):
+    list_display = ('id', 'title', 'pub_year')
+    list_filter = ('title', 'pub_year', 'isbn', 'price')
+    inlines = [
+        BookAuthorsInline,
+        BookGenresInline,
+    ]
+    exclude = ('authors', 'genres')
+
+site.register(Book, BookAdmin)

@@ -42,8 +42,8 @@ class Genre(Model):
         ]
 
 class Book(Model):
-    title = CharField(max_length=255, null=False, blank=False, db_column='title',
-        verbose_name='Заглавие книги')
+    title = CharField(max_length=255, null=False, blank=False,
+        db_column='title', verbose_name='Заглавие книги')
     pub_year = DateField(null=False, blank=False, db_column='pub_year',
         verbose_name='Год публикации')
     isbn = CharField(max_length=13, null=False, blank=False, db_column='isbn',

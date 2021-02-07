@@ -7,7 +7,7 @@ class Author(Model):
         db_column='full_name', verbose_name='Полное имя автора')
     birth_date = DateField(null=False, blank=False, db_column='birth_date',
         verbose_name='Дата рождения')
-    death_date = DateField(null=False, blank=True, db_column='death_date',
+    death_date = DateField(null=False, blank=False, db_column='death_date',
         default='9999-12-31', verbose_name='Дата сметри')
 
     def __str__(self) -> str:

@@ -32,6 +32,8 @@ class Author(Model):
                 check=Q(birth_date__lt=F('death_date')),
                 name='author_check'),
         ]
+        verbose_name = 'автор'
+        verbose_name_plural = 'авторы'
 
 class Genre(Model):
     name = CharField(max_length=255, null=False, blank=False, db_column='name',
@@ -50,6 +52,8 @@ class Genre(Model):
         constraints = [
             CheckConstraint(check=~Q(name=''), name='genre_name_check'),
         ]
+        verbose_name = 'жанр'
+        verbose_name_plural = 'жанры'
 
 class Book(Model):
     title = CharField(max_length=255, null=False, blank=False,
@@ -87,6 +91,8 @@ class Book(Model):
                 name='book_isbn_check'),
             CheckConstraint(check=Q(price__gt=0), name='book_price_check'),
         ]
+        verbose_name = 'книга'
+        verbose_name_plural = 'книги'
 """
 from main.models import Author, Book, Genre
 

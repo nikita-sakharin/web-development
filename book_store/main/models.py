@@ -69,6 +69,8 @@ class Book(Model):
     """
     def get_absolute_url(self):
         return F'/books/{self.id}' # book or books?
+        from django.urls import reverse
+        return reverse('people.views.details', args=[str(self.id)])
     """
 
     class Meta:

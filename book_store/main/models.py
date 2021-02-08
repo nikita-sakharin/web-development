@@ -15,6 +15,11 @@ class Author(Model):
             return F'{self.full_name}: {self.birth_date}'
         return F'{self.full_name}: {self.birth_date} - {self.death_date}'
 
+    """
+    def get_absolute_url(self):
+        return F'/authors/{self.id}' # author or authors?
+    """
+
     class Meta:
         db_table = 'author'
         constraints = [
@@ -34,6 +39,11 @@ class Genre(Model):
 
     def __str__(self) -> str:
         return str(self.name)
+
+    """
+    def get_absolute_url(self):
+        return F'/genres/{self.id}' # genre or genres?
+    """
 
     class Meta:
         db_table = 'genre'
@@ -55,6 +65,11 @@ class Book(Model):
 
     def __str__(self) -> str:
         return F'{self.title}, {self.pub_year.year} - {self.isbn}'
+
+    """
+    def get_absolute_url(self):
+        return F'/books/{self.id}' # book or books?
+    """
 
     class Meta:
         db_table = 'book'

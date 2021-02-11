@@ -15,11 +15,12 @@ Including another URLconf
 """
 from django.urls import path
 
-from . import views
+from main.views import BookView, book_detail, books
 
 urlpatterns = [
-    path('books/<int:book_id>', views.book_detail, name='book_detail'),
-    path('books', views.books, name='books'),
+    path('api/books', BookView.as_view()),
+    path('books/<int:book_id>', book_detail, name='book_detail'),
+    path('books', books, name='books'),
 ]
 # TODO декоратор
 # POST - добавление update.

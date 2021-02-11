@@ -9,9 +9,8 @@ from main.serializers import AuthorSerializer, BookSerializer, GenreSerializer
 class BookView(APIView):
     def get(self, request, format=None):
         books = Book.objects.all()
-        # serializer = BookSerializer(books, many=True)
-        # return Response(serializer.data)
-        return Response({'books': books})
+        serializer = BookSerializer(books) #, many=True)
+        return Response(serializer.data)
     """
     def post(self, request):
         form = BookForm(request.GET) # GET or POST ?

@@ -9,7 +9,7 @@ from main.serializers import AuthorSerializer, BookSerializer, GenreSerializer
 class BookView(APIView):
     def get(self, request, format=None):
         books = Book.objects.all()
-        serializer = BookSerializer(books) #, many=True)
+        serializer = BookSerializer(books, many=True)
         return Response(serializer.data)
     """
     def post(self, request):

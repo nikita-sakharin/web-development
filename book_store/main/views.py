@@ -8,15 +8,20 @@ from main.serializers import AuthorSerializer, BookSerializer, GenreSerializer
 
 class BookView(APIView):
     def get(self, request, format=None):
-        usernames = [user.username for user in User.objects.all()]
-        return Response(usernames)
-
+        books = Book.objects.all()
+        # serializer = BookSerializer(books, many=True)
+        # return Response(serializer.data)
+        return Response({'books': books})
+    """
     def post(self, request):
         form = BookForm(request.GET) # GET or POST ?
         if form.is_valid():
             course = form.save()
             return Response({'post_id': course.id})
         return Response({'error': form.errors})
+    """
+    def post(self, request):
+        return Response({'error': None, 'result': 'Книга успешно добавлена'})
 
 def book_detail(request, book_id):
     try:

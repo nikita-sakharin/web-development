@@ -6,6 +6,14 @@ class AuthorSerializer(Serializer):
     birth_date = DateField()
     death_date = DateField()
 
+"""
+from rest_framework.serializers import ModelSerializer
+class BookSerializer(ModelSerializer):
+    class Meta:
+        model = Book
+        fields = '__all__'
+"""
+
 class BookSerializer(Serializer):
     title = CharField(max_length=255)
     pub_year = DateField()

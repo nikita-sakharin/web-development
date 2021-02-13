@@ -11,7 +11,6 @@ class AuthorSerializer(Serializer):
 class BookSerializer(ModelSerializer):
     class Meta:
         model = Book
-        fields = '__all__'
         exclude = ['id']
 
 """

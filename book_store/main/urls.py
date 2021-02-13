@@ -19,7 +19,7 @@ from main.views import BookView, book_detail, books_list
 
 urlpatterns = [
     path('api/books', BookView.as_view()),
-    path('books/<int:book_id>', book_detail, name='book_detail'),
+    path('books/<int:pk>', book_detail, name='book_detail'),
     path('books', books_list, name='books_list'),
 ]
 # TODO декоратор

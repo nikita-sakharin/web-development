@@ -24,9 +24,9 @@ class BookView(APIView):
     def post(self, request):
         return Response({'error': None, 'result': 'Книга успешно добавлена'})
 
-def book_detail(request, book_id):
+def book_detail(request, pk):
     try:
-        book = Book.objects.get(id=book_id)
+        book = Book.objects.get(id=pk)
     except Book.DoesNotExist:
         raise Http404("There is no such book unfortunately")
     return render(request, 'book.html', {'book': book})

@@ -31,7 +31,7 @@ def book_detail(request, book_id):
         raise Http404("There is no such book unfortunately")
     return render(request, 'book.html', {'book': book})
 
-def books(request):
+def books_list(request):
     return render(request, 'books.html', {'books': Book.objects.all()})
 """
 from django.shortcuts import render

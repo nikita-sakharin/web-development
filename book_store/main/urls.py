@@ -18,8 +18,8 @@ from django.urls import path
 from main.views import BookDetail, BookList, book_detail, books
 
 urlpatterns = [
-    path('api/books/', BookList.as_view()),
-    path('api/books/<int:pk>/', BookDetail.as_view()),
+    path('api/books', BookList.as_view()),
+    path('api/books/<int:pk>', BookDetail.as_view()),
     path('books/<int:book_id>', book_detail, name='book_detail'),
     path('books', books, name='books'),
 ]

@@ -7,6 +7,7 @@ from main.models import Author, Book, Genre
 from main.serializers import AuthorSerializer, BookSerializer, GenreSerializer
 
 class BookView(APIView):
+    serializer_class = BookSerializer
     def get(self, request, format=None):
         books = Book.objects.all()
         serializer = BookSerializer(books, many=True)

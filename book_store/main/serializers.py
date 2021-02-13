@@ -1,19 +1,18 @@
-from rest_framework.serializers import (CharField, DateField, DecimalField,
-    ModelSerializer, Serializer)
+from rest_framework.serializers import ModelSerializer
 
-from main.models import Book, Genre
+from main.models import Author, Book, Genre
 
-class AuthorSerializer(Serializer):
-    full_name = CharField(max_length=255)
-    birth_date = DateField()
-    death_date = DateField()
+class AuthorSerializer(ModelSerializer):
+    class Meta:
+        model = Author
+        fields = '__all__'
 
 class BookSerializer(ModelSerializer):
     class Meta:
         model = Book
-        exclude = ['id']
+        fields = '__all__'
 
 class GenreSerializer(ModelSerializer):
     class Meta:
         model = Genre
-        exclude = ['id']
+        fields = '__all__'

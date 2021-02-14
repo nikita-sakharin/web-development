@@ -20,8 +20,8 @@ from main.views import BookDetail, BookList, book_detail, books_list
 urlpatterns = [
     path('api/books/', BookList.as_view()),
     path('api/books/<int:pk>/', BookDetail.as_view()),
-    path('books/<int:pk>/', book_detail, name='book_detail'),
-    path('books/', books_list, name='books_list'),
+    path('books/<int:pk>/', book_detail, name='book-detail'),
+    path('books/', books_list, name='books-list'),
 ]
 # TODO декоратор
 # POST - добавление update.

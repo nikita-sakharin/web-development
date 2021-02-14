@@ -72,7 +72,7 @@ class Book(Model):
         return F'{self.title}, {self.pub_year.year} - {self.isbn}'
 
     def get_absolute_url(self):
-        return reverse('main.views.book_detail', args=[str(self.id)])
+        return reverse('book-detail', args=[str(self.id)])
 
     class Meta:
         db_table = 'book'

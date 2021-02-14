@@ -1,6 +1,7 @@
 from django.db.models import (CharField, CheckConstraint, DateField,
     DecimalField, F, ManyToManyField, Model, Q, UniqueConstraint)
 from django.db.models.functions import Now, Trunc
+from django.urls import reverse
 
 class Author(Model):
     full_name = CharField(max_length=255, null=False, blank=False,
@@ -70,12 +71,8 @@ class Book(Model):
     def __str__(self) -> str:
         return F'{self.title}, {self.pub_year.year} - {self.isbn}'
 
-    """
     def get_absolute_url(self):
-        return F'/books/{self.id}' # book or books?
-        from django.urls import reverse
-        return reverse('people.views.details', args=[str(self.id)])
-    """
+        return reverse('main.views.book_detail', args=[str(self.id)])
 
     class Meta:
         db_table = 'book'

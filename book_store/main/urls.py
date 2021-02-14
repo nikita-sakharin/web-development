@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.urls import path
 
-from main.views import BookView, book_detail, books_list
+from main.views import BookDetail, BookList, book_detail, books_list
 
 urlpatterns = [
     path('api/books', BookList.as_view()),

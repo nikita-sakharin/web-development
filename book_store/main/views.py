@@ -1,3 +1,4 @@
+from django.http import Http404
 from django.shortcuts import render
 
 from rest_framework.response import Response
@@ -30,12 +31,12 @@ class GenreList(ListCreateAPIView):
     queryset = Genre.objects.all()
     serializer_class = GenreSerializer
 
-def book_detail(request, book_id):
+def book_detail(request, pk):
     try:
-        book = Book.objects.get(id=book_id)
+        book = Book.objects.get(id=pk)
     except Book.DoesNotExist:
         raise Http404("There is no such book unfortunately")
     return render(request, 'book.html', {'book': book})
 
-def books(request):
+def books_list(request):
     return render(request, 'books.html', {'books': Book.objects.all()})

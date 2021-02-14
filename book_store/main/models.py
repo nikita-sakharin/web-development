@@ -16,8 +16,10 @@ class Author(Model):
             return F'{self.full_name}: {self.birth_date}'
         return F'{self.full_name}: {self.birth_date} - {self.death_date}'
 
+    """
     def get_absolute_url(self):
         return reverse('author-detail', args=[str(self.id)])
+    """
 
     class Meta:
         db_table = 'author'
@@ -41,8 +43,10 @@ class Genre(Model):
     def __str__(self) -> str:
         return str(self.name)
 
+    """
     def get_absolute_url(self):
         return reverse('genre-detail', args=[str(self.id)])
+    """
 
     class Meta:
         db_table = 'genre'

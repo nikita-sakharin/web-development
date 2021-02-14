@@ -7,11 +7,15 @@
     <title>{% block title %}{% endblock %}</title>
   </head>
   <body>
-    <h1 align="center">
-      <img alt="Logo" src="{% static "images/logo.png" %}" width="40" height="40"/>
-      Welcome to book-store!
-    </h1>
+    <header>
+      <h1 align="center">
+        <img alt="Logo" src="{% static "images/logo.png" %}" width="40" height="40"/>
+        Welcome to book-store!
+      </h1>
+    </header>
     {% block content %}{% endblock %}
-    <footer><center><i>Powered by Django</i></center></footer>
+    <footer>
+      <center><i>Powered by Django</i></center>
+    </footer>
   </body>
 </html>

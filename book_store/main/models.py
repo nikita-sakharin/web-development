@@ -18,7 +18,7 @@ class Author(Model):
 
     """
     def get_absolute_url(self):
-        return F'/authors/{self.id}' # author or authors?
+        return reverse('author-detail', args=[str(self.id)])
     """
 
     class Meta:
@@ -45,7 +45,7 @@ class Genre(Model):
 
     """
     def get_absolute_url(self):
-        return F'/genres/{self.id}' # genre or genres?
+        return reverse('genre-detail', args=[str(self.id)])
     """
 
     class Meta:

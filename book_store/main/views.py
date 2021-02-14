@@ -31,6 +31,7 @@ class GenreList(ListCreateAPIView):
     queryset = Genre.objects.all()
     serializer_class = GenreSerializer
 
+@require_http_methods(["GET", "POST"])
 def book_detail(request, pk):
     try:
         book = Book.objects.get(id=pk)
@@ -38,5 +39,6 @@ def book_detail(request, pk):
         raise Http404("There is no such book unfortunately")
     return render(request, 'book.html', {'book': book})
 
+@require_http_methods(["GET", "POST"])
 def books_list(request):
     return render(request, 'books.html', {'books': Book.objects.all()})

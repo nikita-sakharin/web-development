@@ -5,10 +5,10 @@
 {% block content %}
 
 <p>{{ book.title }}</p>
-<p>Автор {% for author in book.authors.all %}{{ author.full_name }} {% endfor %}</p>
-<p>Год выпуска {{ book.pub_year.year }}</p>
+<p>By {% for author in book.authors.all %}{{ author.full_name }}{% endfor %}</p>
+<p>Publication year: {{ book.pub_year.year }}</p>
 <p>ISBN: {{ book.isbn }}</p>
-<p>{{ book.price }}₽</p>
-<p>link to book {{ book.id }}</p>
+<p>{{ book.price }} ₽</p>
+<p>tag(s): {% for genre in book.genres.all %}{{ genre.name }}{% endfor %}</p>
 
 {% endblock %}

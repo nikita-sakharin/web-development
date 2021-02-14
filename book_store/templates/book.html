@@ -9,6 +9,6 @@
     <p>Publication year: {{ book.pub_year.year }}</p>
     <p>ISBN: {{ book.isbn }}</p>
     <p>{{ book.price }} ₽</p>
-    <p>tag(s): {% for genre in book.genres.all %}{{ genre.name }}{% endfor %}</p>
+    <p>In {% for genre in book.genres.all %}{{ genre.name }}{% endfor %}</p>
 </div>
 {% endblock %}

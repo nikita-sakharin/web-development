@@ -2,8 +2,8 @@ from django.http import Http404
 from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
 
-from rest_framework.response import Response
 from rest_framework.generics import (ListCreateAPIView, RetrieveUpdateAPIView)
+from rest_framework.response import Response
 
 from main.models import Author, Book, Genre
 from main.serializers import AuthorSerializer, BookSerializer, GenreSerializer

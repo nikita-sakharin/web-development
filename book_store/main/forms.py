@@ -11,11 +11,11 @@ class AuthorForm(ModelForm):
 class BookForm(ModelForm):
     class Meta:
         model = Book
-        fields = '__all__' # ?
+        fields = '__all__'
         exclude = ['id']
 
 class GenreForm(ModelForm):
     class Meta:
         model = Genre
-        fields = '__all__'  # ?
+        fields = '__all__'
         exclude = ['id']

@@ -16,13 +16,17 @@ class AuthorList(ListCreateAPIView):
     queryset = Author.objects.all()
     serializer_class = AuthorSerializer
 
-class BookDetail(RetrieveUpdateAPIView):
-    queryset = Book.objects.all()
-    serializer_class = BookSerializer
+class BookView(APIView):
+    def get(self, request):
+        serializer = BookSerializer(Book.objects.all(), many=True)
+        return Response(serializer.data)
 
-class BookList(ListCreateAPIView):
-    queryset = Book.objects.all()
-    serializer_class = BookSerializer
+    def post(self, request):
+        form = BookForm(request.data)
+        if form.is_valid():
+            book = form.save()
+            return Response({'book_id': book.id})
+        return Response({'error': form.errors})
 
 class GenreDetail(RetrieveUpdateAPIView):
     queryset = Genre.objects.all()

@@ -26,12 +26,12 @@ class BookDetail(APIView):
             raise Http404
 
     def get(self, request, pk, format=None):
-        book = self.get_object(pk)
+        book = self.__get_object(pk)
         serializer = BookSerializer(book)
         return Response(serializer.data)
 
     def put(self, request, pk, format=None):
-        book = self.get_object(pk)
+        book = self.__get_object(pk)
         serializer = BookSerializer(book, data=request.data)
         if serializer.is_valid():
             serializer.save()

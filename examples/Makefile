@@ -1,7 +1,7 @@
 all: python
 
 install:
-	apt install build-essential gcc git libpq-dev libssl-dev nginx \
+	apt install build-essential curl gcc git libpq-dev libssl-dev nginx \
 		postgresql-12 pycodestyle python3 python3-dev python3-pip python3-venv \
 		python3-wheel -y
 

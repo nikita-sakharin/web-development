@@ -70,3 +70,17 @@ def book_detail(request, pk):
 @require_http_methods(["GET", "POST"])
 def books_list(request):
     return render(request, 'books.html', {'books': Book.objects.all()})
+"""
+curl -X POST -H "Content-Type: application/json" -d '{
+    "title": "Основы математического анализа",
+    "pub_year": "2021-01-01",
+    "isbn": "9785811475834",
+    "price": 1460,
+    "authors": [
+        2
+    ],
+    "genres": [
+        3
+    ]
+}' http://127.0.0.1:8000/api/books/
+"""

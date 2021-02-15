@@ -1,5 +1,5 @@
 from django.db.models import (CharField, CheckConstraint, DateField,
-    DecimalField, F, ManyToManyField, Model, Q, UniqueConstraint)
+    DecimalField, F, ImageField, ManyToManyField, Model, Q, UniqueConstraint)
 from django.db.models.functions import Now, Trunc
 from django.urls import reverse
 
@@ -65,6 +65,8 @@ class Book(Model):
         unique=True, verbose_name='Международный стандартный номер книги')
     price = DecimalField(max_digits=19, decimal_places=2, null=False,
         blank=False, db_column='price', verbose_name='Цена')
+    cover = ImageField(upload_to='cars', max_length=255, null=True, blank=True,
+        db_column='cover', verbose_name='Обложка')
     authors = ManyToManyField(Author)
     genres = ManyToManyField(Genre)
 

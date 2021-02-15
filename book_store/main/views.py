@@ -55,5 +55,5 @@ curl -X POST -H "Content-Type: application/json" -d '{
     "genres": [
         3
     ]
-}' http://127.0.0.1:8000/
+}' http://127.0.0.1:8000/api/books/
 """

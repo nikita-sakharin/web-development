@@ -126,3 +126,8 @@ USE_TZ = True
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
+
+# MEDIA_ROOT =
+# MEDIA_URL =
+
+DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'

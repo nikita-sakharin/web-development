@@ -2,8 +2,10 @@ from django.http import Http404
 from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
 
+from rest_framework import status
 from rest_framework.generics import (ListCreateAPIView, RetrieveUpdateAPIView)
 from rest_framework.response import Response
+from rest_framework.views import APIView
 
 from main.models import Author, Book, Genre
 from main.serializers import AuthorSerializer, BookSerializer, GenreSerializer
@@ -16,17 +18,38 @@ class AuthorList(ListCreateAPIView):
     queryset = Author.objects.all()
     serializer_class = AuthorSerializer
 
-class BookView(APIView):
-    def get(self, request):
-        serializer = BookSerializer(Book.objects.all(), many=True)
+class BookDetail(APIView):
+    def __get_object(self, pk):
+        try:
+            return Book.objects.get(pk=pk)
+        except Book.DoesNotExist:
+            raise Http404
+
+    def get(self, request, pk, format=None):
+        book = self.get_object(pk)
+        serializer = BookSerializer(book)
         return Response(serializer.data)
 
-    def post(self, request):
-        form = BookForm(request.data)
-        if form.is_valid():
-            book = form.save()
-            return Response({'book_id': book.id})
-        return Response({'error': form.errors})
+    def put(self, request, pk, format=None):
+        book = self.get_object(pk)
+        serializer = BookSerializer(book, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class BookList(APIView):
+    def get(self, request, format=None):
+        books = Book.objects.all()
+        serializer = BookSerializer(books, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, format=None):
+        serializer = BookSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class GenreDetail(RetrieveUpdateAPIView):
     queryset = Genre.objects.all()

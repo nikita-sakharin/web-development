@@ -136,4 +136,4 @@ DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
 # AWS_ACCESS_KEY_ID =
 # AWS_SECRET_ACCESS_KEY =
 # AWS_STORAGE_BUCKET_NAME =
-# AWS_S3_ENDPOINT_URL =
+AWS_S3_ENDPOINT_URL = 'http://hb.bizmrg.com'

@@ -143,3 +143,13 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'social_core.backends.vk.VKOAuth2',
 ]
+
+LOGIN_REDIRECT_URL = 'home'
+LOGIN_URL = 'login'
+LOGOUT_REDIRECT_URL = 'login'
+LOGOUT_URL = 'logout' # ???
+
+SOCIAL_AUTH_VK_OAUTH2_KEY = '<key>'
+SOCIAL_AUTH_VK_OAUTH2_SECRET = '<secret>'
+SOCIAL_AUTH_URL_NAMESPACE = 'social'
+SOCIAL_AUTH_VK_OAUTH2_SCOPE = ['email', 'groups', 'wall']

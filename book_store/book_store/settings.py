@@ -137,3 +137,8 @@ AWS_ACCESS_KEY_ID = '<access_key_id>'
 AWS_SECRET_ACCESS_KEY = '<secret_access_key>'
 AWS_STORAGE_BUCKET_NAME = '<storage_bucket_name>'
 AWS_S3_ENDPOINT_URL = 'http://hb.bizmrg.com'
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'social_core.backends.vk.VKOAuth2',
+]

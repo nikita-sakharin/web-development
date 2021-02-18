@@ -17,14 +17,15 @@ from django.contrib.admin import site
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import include, path
-
-from book_store.views import HomePageView
+from django.views.generic.base import TemplateView
 
 urlpatterns = [
-    path('', login_required(HomePageView.as_view()), name='home'),
-    path('login/', LoginView.as_view(), name='login'),
-    path('logout/', LogoutView.as_view(), name='logout'),
     path('', include('main.urls'), name='main'),
+    path('', login_required(TemplateView.as_view(template_name='home.html')),
+        name='home'),
+    path('login/', LoginView.as_view(template_name='login.html'), name='login'),
+    path('logout/', LogoutView.as_view(template_name='logout.html'),
+        name='logout'),
     path('admin/', site.urls),
     path('accounts/login/', LoginView.as_view()),
     path('social', include('social_django.urls', namespace='social')) # name ?

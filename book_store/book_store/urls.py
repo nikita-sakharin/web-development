@@ -21,4 +21,5 @@ urlpatterns = [
     path('', include('main.urls'), name='main'),
     path('admin/', urls),
     path('accounts/login/', LoginView.as_view()),
+    path('social', include('social_django.urls', namespace='social')) # name ?
 ]

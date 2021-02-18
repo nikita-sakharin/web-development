@@ -17,7 +17,7 @@ from django.contrib.admin import site
 from django.contrib.auth.views import LoginView
 from django.urls import include, path
 
-from views import HomePageView
+from book_store.views import HomePageView
 
 urlpatterns = [
     path('', HomePageView.as_view(), name='home'),

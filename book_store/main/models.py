@@ -1,7 +1,15 @@
+from django.contrib.auth.models import AbstractUser
 from django.db.models import (CharField, CheckConstraint, DateField,
     DecimalField, F, ImageField, ManyToManyField, Model, Q, UniqueConstraint)
 from django.db.models.functions import Now, Trunc
 from django.urls import reverse
+
+def get_avatar_path(instance, filename):
+    return f"avatars/{instance.id}_{filename}"
+
+class User(AbstractUser):
+    avatar = ImageField(upload_to=get_cover_path, max_length=255, null=True,
+        blank=True, db_column='avatar', verbose_name='Аватар пользователя')
 
 class Author(Model):
     full_name = CharField(max_length=255, null=False, blank=False,

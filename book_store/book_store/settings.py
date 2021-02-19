@@ -144,6 +144,8 @@ AUTHENTICATION_BACKENDS = [
     'social_core.backends.vk.VKOAuth2',
 ]
 
+AUTH_USER_MODEL = 'main.User'
+
 LOGIN_REDIRECT_URL = 'home'
 LOGIN_URL = 'login'
 LOGOUT_REDIRECT_URL = 'login'
@@ -153,3 +155,4 @@ SOCIAL_AUTH_VK_OAUTH2_KEY = '<key>'
 SOCIAL_AUTH_VK_OAUTH2_SECRET = '<secret>'
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
 SOCIAL_AUTH_VK_OAUTH2_SCOPE = ['email', 'groups', 'wall']
+

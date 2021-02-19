@@ -8,7 +8,7 @@ def get_avatar_path(instance, filename):
     return f"avatars/{instance.id}_{filename}"
 
 class User(AbstractUser):
-    avatar = ImageField(upload_to=get_cover_path, max_length=255, null=True,
+    avatar = ImageField(upload_to=get_avatar_path, max_length=255, null=True,
         blank=True, db_column='avatar', verbose_name='Аватар пользователя')
 
 class Author(Model):

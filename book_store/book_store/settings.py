@@ -144,7 +144,7 @@ AUTHENTICATION_BACKENDS = [
     'social_core.backends.vk.VKOAuth2',
 ]
 
-AUTH_USER_MODEL = 'main.models.User'
+AUTH_USER_MODEL = 'book_store.main.models.User'
 
 LOGIN_REDIRECT_URL = 'home'
 LOGIN_URL = 'login'

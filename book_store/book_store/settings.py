@@ -149,6 +149,7 @@ AUTH_USER_MODEL = 'main.User'
 LOGIN_REDIRECT_URL = 'home'
 LOGIN_URL = 'login'
 LOGOUT_REDIRECT_URL = 'login'
+LOGOUT_URL = 'logout'
 
 SOCIAL_AUTH_VK_OAUTH2_KEY = '<key>'
 SOCIAL_AUTH_VK_OAUTH2_SECRET = '<secret>'

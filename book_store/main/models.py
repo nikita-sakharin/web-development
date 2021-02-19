@@ -56,10 +56,6 @@ class Genre(Model):
         verbose_name = 'жанр'
         verbose_name_plural = 'жанры'
 
-def get_cover_path(instance, filename):
-    book_id = instance.id
-    return f"covers/{book_id}_{filename}"
-
 class Book(Model):
     title = CharField(max_length=255, null=False, blank=False,
         db_column='title', verbose_name='Заглавие книги')
@@ -69,8 +65,6 @@ class Book(Model):
         unique=True, verbose_name='Международный стандартный номер книги')
     price = DecimalField(max_digits=19, decimal_places=2, null=False,
         blank=False, db_column='price', verbose_name='Цена')
-    cover = ImageField(upload_to=get_cover_path, max_length=255, null=True,
-        blank=True, db_column='cover', verbose_name='Обложка')
     authors = ManyToManyField(Author)
     genres = ManyToManyField(Genre)
 

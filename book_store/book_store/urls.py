@@ -20,12 +20,12 @@ from django.urls import include, path
 from django.views.generic.base import TemplateView
 
 urlpatterns = [
+    path('', include('main.urls'), name='main'),
     path('', login_required(TemplateView.as_view(template_name='home.html')),
         name='home'),
+    path('admin/', site.urls),
     path('login/', LoginView.as_view(template_name='login.html'), name='login'),
     path('logout/', LogoutView.as_view(template_name='logout.html'),
         name='logout'),
     path('social', include('social_django.urls', namespace='social')), # name ?
-    path('admin/', site.urls),
-    path('', include('main.urls'), name='main'),
 ]

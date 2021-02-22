@@ -48,8 +48,8 @@ def upload_avatar(request):
     if request.method == 'POST':
         form = UploadAvatarForm(request.POST, request.FILES)
         if form.is_valid():
-            user.avatar = ImageFile(open(request.FILES['avatar'], 'rb'))
-            user.avatar = form.avatar # ???
+            request.user.avatar = ImageFile(open(request.FILES['avatar'], 'rb'))
+            # save
             return HttpResponseRedirect('home') # or ''
     else:
         form = UploadAvatarForm()

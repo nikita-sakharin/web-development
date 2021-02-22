@@ -19,6 +19,8 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import include, path
 from django.views.generic.base import TemplateView
 
+from main.views import upload_avatar
+
 urlpatterns = [
     path('', include('main.urls'), name='main'),
     path('', login_required(TemplateView.as_view(template_name='home.html')),

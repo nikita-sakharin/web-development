@@ -43,6 +43,7 @@ def upload_avatar(request):
             request.user.avatar.delete()
             request.user.avatar = form.cleaned_data['avatar']
             request.user.save()
+            # return HttpResponse(request.user.avatar.read(), content_type="image/jpeg")
             return HttpResponseRedirect(reverse('home'))
     else:
         form = UploadAvatarForm()

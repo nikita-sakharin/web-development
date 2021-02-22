@@ -43,11 +43,11 @@ def upload_avatar(request):
             request.user.avatar.delete()
             request.user.avatar = form.cleaned_data['avatar']
             request.user.save()
-            # return HttpResponse(request.user.avatar.read(), content_type="image/jpeg")
             return HttpResponseRedirect(reverse('home'))
     else:
         form = UploadAvatarForm()
     return render(request, 'upload_avatar.html', {'form': form})
+    # return HttpResponse(request.user.avatar.read(), content_type="image/jpeg")
 
 @require_http_methods(["GET"])
 def book_detail(request, pk):

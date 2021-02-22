@@ -53,7 +53,7 @@ def upload_avatar(request):
             # request.user.avatar.save(, image)
             request.user.avatar = request.FILES['avatar']
             request.user.save()
-            return HttpResponseRedirect('home') # or ''
+            return HttpResponseRedirect('/home') # or ''
     else:
         form = UploadAvatarForm()
     return render(request, 'upload_avatar.html', {'form': form})

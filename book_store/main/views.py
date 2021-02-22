@@ -1,10 +1,12 @@
+from django.contrib.auth.decorators import login_required
+from django.core.files.images import ImageFile
 from django.http import Http404
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.views.decorators.http import require_http_methods
 
 from rest_framework.generics import (ListCreateAPIView, RetrieveUpdateAPIView)
 
-from main.models import Author, Book, Genre
+from main.models import Author, Book, Genre, User
 from main.serializers import AuthorSerializer, BookSerializer, GenreSerializer
 
 class AuthorDetail(RetrieveUpdateAPIView):
@@ -30,8 +32,29 @@ class GenreDetail(RetrieveUpdateAPIView):
 class GenreList(ListCreateAPIView):
     queryset = Genre.objects.all()
     serializer_class = GenreSerializer
+"""
+@login_required
+@require_http_methods(['POST'])
+def avatar_list(request):
+    user = request.user
+    if not user.is_authenticated:
+        return
+    user.avatar = ImageFile(open(request.FILES['file'], 'rb')) # or avatar
+"""
+@login_required
+@require_http_methods(['GET', 'POST'])
+def upload_avatar(request):
+    if request.method == 'POST':
+        form = UploadAvatarForm(request.POST, request.FILES)
+        if form.is_valid():
+            user.avatar = ImageFile(open(request.FILES['file'], 'rb')) # or avatar
+            user.avatar = form.avatar # ???
+            return HttpResponseRedirect('home') # or ''
+    else:
+        form = UploadFileForm()
+    return render(request, 'upload.html', {'form': form})
 
-@require_http_methods(["GET", "POST"])
+@require_http_methods(["GET"])
 def book_detail(request, pk):
     try:
         book = Book.objects.get(id=pk)
@@ -39,8 +62,8 @@ def book_detail(request, pk):
         raise Http404("There is no such book unfortunately")
     return render(request, 'book.html', {'book': book})
 
-@require_http_methods(["GET", "POST"])
-def books_list(request):
+@require_http_methods(["GET"])
+def book_list(request):
     return render(request, 'books.html', {'books': Book.objects.all()})
 """
 curl -X POST -H "Content-Type: application/json" -d '{

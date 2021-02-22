@@ -1,4 +1,4 @@
-from django.forms import ModelForm
+from django.forms import Form, ImageField, ModelForm
 
 from main.models import Author, Book, Genre
 
@@ -19,3 +19,6 @@ class GenreForm(ModelForm):
         model = Genre
         fields = '__all__'
         exclude = ['id']
+
+class UploadAvatarForm(Form):
+    avatar = ImageField()

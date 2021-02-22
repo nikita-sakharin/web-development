@@ -6,7 +6,7 @@ from django.views.decorators.http import require_http_methods
 
 from rest_framework.generics import (ListCreateAPIView, RetrieveUpdateAPIView)
 
-from main.form import UploadAvatarForm
+from main.forms import UploadAvatarForm
 from main.models import Author, Book, Genre, User
 from main.serializers import AuthorSerializer, BookSerializer, GenreSerializer
 

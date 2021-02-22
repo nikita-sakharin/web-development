@@ -2,6 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.files.images import ImageFile
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
+from django.urls import reverse
 from django.views.decorators.http import require_http_methods
 
 from rest_framework.generics import (ListCreateAPIView, RetrieveUpdateAPIView)
@@ -53,7 +54,7 @@ def upload_avatar(request):
             # request.user.avatar.save(, image)
             request.user.avatar = request.FILES['avatar']
             request.user.save()
-            return HttpResponseRedirect('/home') # or ''
+            return HttpResponseRedirect(reverse('home')) # or ''
     else:
         form = UploadAvatarForm()
     return render(request, 'upload_avatar.html', {'form': form})

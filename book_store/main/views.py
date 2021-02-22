@@ -1,14 +1,13 @@
 from django.contrib.auth.decorators import login_required
-from django.core.files.images import ImageFile
 from django.http import Http404, HttpResponseRedirect
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import render
 from django.urls import reverse
 from django.views.decorators.http import require_http_methods
 
 from rest_framework.generics import (ListCreateAPIView, RetrieveUpdateAPIView)
 
 from main.forms import UploadAvatarForm
-from main.models import Author, Book, Genre, User
+from main.models import Author, Book, Genre
 from main.serializers import AuthorSerializer, BookSerializer, GenreSerializer
 
 class AuthorDetail(RetrieveUpdateAPIView):
@@ -34,15 +33,7 @@ class GenreDetail(RetrieveUpdateAPIView):
 class GenreList(ListCreateAPIView):
     queryset = Genre.objects.all()
     serializer_class = GenreSerializer
-"""
-@login_required
-@require_http_methods(['POST'])
-def avatar_list(request):
-    user = request.user
-    if not user.is_authenticated:
-        return
-    user.avatar = ImageFile(open(request.FILES['file'], 'rb')) # or avatar
-"""
+
 @login_required
 @require_http_methods(['GET', 'POST'])
 def upload_avatar(request):

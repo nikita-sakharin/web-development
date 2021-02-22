@@ -48,6 +48,9 @@ def upload_avatar(request):
     if request.method == 'POST':
         form = UploadAvatarForm(request.POST, request.FILES)
         if form.is_valid():
+            # image = form.cleaned_data.get('img')
+            # image = form.cleaned_data.avatar
+            # request.user.avatar.save(, image)
             request.user.avatar = ImageFile(open(request.FILES['avatar'], 'rb'))
             # save
             return HttpResponseRedirect('home') # or ''

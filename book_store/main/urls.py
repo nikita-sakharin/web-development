@@ -23,7 +23,7 @@ urlpatterns = [
     path('api/books/<int:pk>/', BookDetail.as_view()),
     path('books/', book_list, name='books-list'),
     path('books/<int:pk>/', book_detail, name='book-detail'),
-    path('media/<int:user_id>/<filename>/', avatar_),
-    path('media/<int:user_id>/', avatars_list),
+    # path('media/<int:user_id>/<filename>/', avatar_),
+    # path('media/<int:user_id>/', avatars_list),
 ]
 # TODO BookSearch, BookSearchForm

@@ -7,4 +7,9 @@
   <button>
     <a href="{% url 'social:begin' 'vk-oauth2' %}">Sign in with VK</a>
   </button>
+  <form method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit">Login</button>
+    </form>
 {% endblock %}

@@ -51,7 +51,7 @@ def upload_avatar(request):
             user.avatar = form.avatar # ???
             return HttpResponseRedirect('home') # or ''
     else:
-        form = UploadFileForm()
+        form = UploadAvatarForm()
     return render(request, 'upload.html', {'form': form})
 
 @require_http_methods(["GET"])

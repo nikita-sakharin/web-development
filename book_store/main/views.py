@@ -53,7 +53,7 @@ def upload_avatar(request):
             return HttpResponseRedirect('home') # or ''
     else:
         form = UploadAvatarForm()
-    return render(request, 'upload.html', {'form': form})
+    return render(request, 'upload_avatar.html', {'form': form})
 
 @require_http_methods(["GET"])
 def book_detail(request, pk):

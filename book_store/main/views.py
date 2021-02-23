@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
-from django.http import Http404, HttpResponseRedirect
+from django.http import FileResponse, Http404, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 from django.views.decorators.http import require_http_methods
@@ -35,12 +35,12 @@ class GenreList(ListCreateAPIView):
     queryset = Genre.objects.all()
     serializer_class = GenreSerializer
 
-from django.http import FileResponse, HttpResponse
+# from django.http import HttpResponse
+# return HttpResponse(request.user.avatar.read(), content_type="image/jpeg")
 
 @login_required
 @require_http_methods(['GET'])
 def avatar_get(request):
-    # return HttpResponse(request.user.avatar.read(), content_type="image/jpeg")
     if settings.DEBUG:
         avatar = request.user.avatar
         return FileResponse(avatar)

@@ -35,9 +35,6 @@ class GenreList(ListCreateAPIView):
     queryset = Genre.objects.all()
     serializer_class = GenreSerializer
 
-# from django.http import HttpResponse
-# return HttpResponse(request.user.avatar.read(), content_type="image/jpeg")
-
 @login_required
 @require_http_methods(['GET'])
 def avatar_get(request):

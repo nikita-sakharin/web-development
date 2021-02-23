@@ -20,5 +20,5 @@ class GenreForm(ModelForm):
         fields = '__all__'
         exclude = ['id']
 
-class UploadAvatarForm(Form):
+class ChangeAvatarForm(Form):
     avatar = ImageField()

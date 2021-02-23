@@ -19,7 +19,7 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import include, path
 from django.views.generic.base import TemplateView
 
-from main.views import upload_avatar
+from main.views import change_avatar
 
 urlpatterns = [
     path('', include('main.urls'), name='main'),
@@ -31,5 +31,6 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(template_name='logout.html'),
         name='logout'),
     path('social/', include('social_django.urls', namespace='social')), # name ?
-    path('user/upload_avatar/', upload_avatar),
+    path('user/avatar/', avatar),
+    path('user/chage_avatar/', chage_avatar),
 ]

@@ -7,6 +7,7 @@
 
 {% if user.is_authenticated %}
   {{ user.username }}
+  <!--{{ user.avatar }}-->
   <button>
     <a href="{% url 'logout' %}">Logout</a>
   </button>

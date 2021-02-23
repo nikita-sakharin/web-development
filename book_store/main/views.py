@@ -6,7 +6,7 @@ from django.views.decorators.http import require_http_methods
 
 from rest_framework.generics import (ListCreateAPIView, RetrieveUpdateAPIView)
 
-from main.forms import UploadAvatarForm
+from main.forms import ChangeAvatarForm
 from main.models import Author, Book, Genre
 from main.serializers import AuthorSerializer, BookSerializer, GenreSerializer
 
@@ -36,17 +36,17 @@ class GenreList(ListCreateAPIView):
 
 @login_required
 @require_http_methods(['GET', 'POST'])
-def upload_avatar(request):
+def change_avatar(request):
     if request.method == 'POST':
-        form = UploadAvatarForm(request.POST, request.FILES)
+        form = ChangeAvatarForm(request.POST, request.FILES)
         if form.is_valid():
             request.user.avatar.delete()
             request.user.avatar = form.cleaned_data['avatar']
             request.user.save()
             return HttpResponseRedirect(reverse('home'))
     else:
-        form = UploadAvatarForm()
-    return render(request, 'upload_avatar.html', {'form': form})
+        form = ChangeAvatarForm()
+    return render(request, 'change_avatar.html', {'form': form})
     # return HttpResponse(request.user.avatar.read(), content_type="image/jpeg")
 
 @require_http_methods(["GET"])

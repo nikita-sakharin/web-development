@@ -56,7 +56,7 @@ def avatar_change(request):
             user = request.user
             user.avatar.delete()
             avatar = form.cleaned_data['avatar']
-            avatar.name += avatar.content_type.split('/')[-1]
+            avatar.name += '.' + avatar.content_type.split('/')[-1]
             user.avatar = avatar
             user.save()
             return HttpResponseRedirect(reverse('home'))

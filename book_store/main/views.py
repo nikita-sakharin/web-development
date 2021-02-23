@@ -1,4 +1,4 @@
-from django.conf.settings import DEBUG
+from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render
@@ -41,7 +41,7 @@ from django.http import FileResponse, HttpResponse
 @require_http_methods(['GET'])
 def avatar_get(request):
     # return HttpResponse(request.user.avatar.read(), content_type="image/jpeg")
-    if DEBUG:
+    if settings.DEBUG:
         avatar = request.user.avatar
         return FileResponse(avatar)
     else:

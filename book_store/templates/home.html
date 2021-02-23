@@ -6,9 +6,8 @@
 <h1>Book-store home</h1>
 
 {% if user.is_authenticated %}
-  {{ user.username }}
-  <img alt="Avatar" src="{% url 'avatar' %}" width="10%" height="10%"/>
-
+  {{ user.username }}<br/>
+  <img alt="Avatar" src="{% url 'avatar' %}" width="10%" height="10%"/><br/>
   <button>
     <a href="{% url 'logout' %}">Logout</a>
   </button>

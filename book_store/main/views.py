@@ -42,7 +42,7 @@ def avatar_get(request):
         avatar = request.user.avatar
         if avatar:
             return FileResponse(avatar)
-        return HttpResponseRedirect(settings.STATIC_URL + 'default_avatar.png')
+        return HttpResponseRedirect(settings.STATIC_URL + 'images/default_avatar.png')
     else:
         pass
 

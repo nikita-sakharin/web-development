@@ -43,7 +43,6 @@ def avatar_get(request):
     # return HttpResponse(request.user.avatar.read(), content_type="image/jpeg")
     if settings.DEBUG:
         avatar = request.user.avatar
-        print(dir(avatar))
         return FileResponse(avatar)
     else:
         pass

@@ -43,6 +43,7 @@ def avatar_get(request):
     # return HttpResponse(request.user.avatar.read(), content_type="image/jpeg")
     if settings.DEBUG:
         avatar = request.user.avatar
+        print(dir(avatar))
         return FileResponse(avatar)
     else:
         pass
@@ -56,7 +57,7 @@ def avatar_change(request):
             user = request.user
             user.avatar.delete()
             user.avatar = form.cleaned_data['avatar']
-            # user.save()
+            user.save()
             return HttpResponseRedirect(reverse('home'))
     else:
         form = ChangeAvatarForm()

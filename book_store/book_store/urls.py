@@ -19,7 +19,7 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import include, path
 from django.views.generic.base import TemplateView
 
-from main.views import change_avatar
+from main.views import avatar, change_avatar
 
 urlpatterns = [
     path('', include('main.urls'), name='main'),

@@ -1,3 +1,4 @@
+from django.conf.settings import DEBUG
 from django.contrib.auth.decorators import login_required
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render
@@ -9,7 +10,6 @@ from rest_framework.generics import (ListCreateAPIView, RetrieveUpdateAPIView)
 from main.forms import ChangeAvatarForm
 from main.models import Author, Book, Genre
 from main.serializers import AuthorSerializer, BookSerializer, GenreSerializer
-from settings import DEBUG
 
 class AuthorDetail(RetrieveUpdateAPIView):
     queryset = Author.objects.all()

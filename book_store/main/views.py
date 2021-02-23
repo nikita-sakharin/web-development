@@ -37,6 +37,7 @@ class GenreList(ListCreateAPIView):
 @login_required
 @require_http_methods(['GET'])
 def avatar_get(request):
+
     return render(request, 'avatar_change.html', {'form': form})
 
 @login_required
@@ -45,9 +46,10 @@ def avatar_change(request):
     if request.method == 'POST':
         form = ChangeAvatarForm(request.POST, request.FILES)
         if form.is_valid():
-            request.user.avatar.delete()
-            request.user.avatar = form.cleaned_data['avatar']
-            request.user.save()
+            user = request.user
+            user.avatar.delete()
+            user.avatar = form.cleaned_data['avatar']
+            # user.save()
             return HttpResponseRedirect(reverse('home'))
     else:
         form = ChangeAvatarForm()

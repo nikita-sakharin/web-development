@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.http import FileResponse, Http404, HttpResponseRedirect
+from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 from django.views.decorators.http import require_http_methods
@@ -34,11 +34,17 @@ class GenreList(ListCreateAPIView):
     queryset = Genre.objects.all()
     serializer_class = GenreSerializer
 
+from django.http import FileResponse, HttpResponse
+
 @login_required
 @require_http_methods(['GET'])
 def avatar_get(request):
-
-    return render(request, 'avatar_change.html', {'form': form})
+    # return HttpResponse(request.user.avatar.read(), content_type="image/jpeg")
+    if DEBUG:
+        avatar = request.user.avatar
+        return FileResponse(request.user.avatar.read())
+    else:
+        pass
 
 @login_required
 @require_http_methods(['GET', 'POST'])
@@ -54,7 +60,6 @@ def avatar_change(request):
     else:
         form = ChangeAvatarForm()
     return render(request, 'avatar_change.html', {'form': form})
-    # return HttpResponse(request.user.avatar.read(), content_type="image/jpeg")
 
 @require_http_methods(["GET"])
 def book_detail(request, pk):

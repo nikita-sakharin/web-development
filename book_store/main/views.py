@@ -40,7 +40,9 @@ class GenreList(ListCreateAPIView):
 def avatar_get(request):
     if settings.DEBUG:
         avatar = request.user.avatar
-        return FileResponse(avatar)
+        if avatar:
+            return FileResponse(avatar)
+        return HttpResponseRedirect(settings.STATIC_URL + 'default_avatar.png')
     else:
         pass
 

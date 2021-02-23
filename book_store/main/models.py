@@ -4,8 +4,8 @@ from django.db.models import (CharField, CheckConstraint, DateField,
 from django.db.models.functions import Now, Trunc
 from django.urls import reverse
 
-def get_avatar_path(instance, _):
-    return f"avatars/{instance.id}"
+def get_avatar_path(instance, filename):
+    return f"avatars/{instance.id}.{filename.split('.')[-1]}"
 
 class User(AbstractUser):
     avatar = ImageField(upload_to=get_avatar_path, max_length=255, null=True,

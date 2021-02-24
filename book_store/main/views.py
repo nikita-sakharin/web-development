@@ -77,7 +77,7 @@ def book_detail(request, pk):
 def book_list(request):
     return render(request, 'books.html', {'books': get_list_or_404(Book)})
 """
-curl -X POST -H "Content-Type: application/json" -d '{
+curl -X POST -H 'Content-Type: application/json' -d '{
     "title": "Основы математического анализа",
     "pub_year": "2021-01-01",
     "isbn": "9785811475834",

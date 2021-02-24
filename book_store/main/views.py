@@ -37,7 +37,7 @@ class GenreList(ListCreateAPIView):
 
 @login_required
 @require_http_methods(['GET'])
-def avatar_get(request, pk):
+def avatar_get(request, path):
     user = request.user
     if user.is_staff and user.id != pk:
         user = get_object_or_404(User, pk=pk)

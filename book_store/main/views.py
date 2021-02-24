@@ -1,3 +1,5 @@
+from os.path import splitext
+
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.http import FileResponse, HttpResponseForbidden
@@ -37,18 +39,18 @@ class GenreList(ListCreateAPIView):
 
 @login_required
 @require_http_methods(['GET'])
-def avatar_get(request, path):
+def avatars(request, pk, ext):
     user = request.user
     if user.is_staff and user.id != pk:
         user = get_object_or_404(User, pk=pk)
     if user.id != pk:
         return HttpResponseForbidden('<!DOCTYPE html><html lang="en"><body><h1>'
             '403 Forbidden</h1></body></html>')
+    if user.avatar:
+        return FileResponse(user.avatar)
+
+    return redirect(settings.STATIC_URL + 'images/default_avatar.png')
     if settings.DEBUG:
-        if user.avatar:
-            return FileResponse(user.avatar)
-        return redirect(settings.STATIC_URL + 'images/default_avatar.png')
-    else:
         pass
 
 @login_required

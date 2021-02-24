@@ -43,7 +43,8 @@ def avatar_get(request, pk):
     if user.is_staff and user.id != pk:
         user = get_object_or_404(User, pk=pk)
     if user.id != pk:
-        raise PermissionDenied('Permission denied')
+        return HttpResponseForbidden('<!DOCTYPE html><html lang="en"><body><h1>'
+            '403 Forbidden</h1></body></html>')
     if settings.DEBUG:
         if user.avatar:
             return FileResponse(user.avatar)

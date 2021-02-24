@@ -7,7 +7,7 @@
 
 {% if user.is_authenticated %}
   {{ user.username }}<br/>
-  <img alt="Avatar" src="{% url 'avatar' %}" width="10%" height="10%"/><br/>
+  <img alt="Avatar" src="{% url 'avatar' user.id %}" width="10%" height="10%"/><br/>
   <button>
     <a href="{% url 'logout' %}">Logout</a>
   </button>

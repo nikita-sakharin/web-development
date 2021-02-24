@@ -1,13 +1,15 @@
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
-from django.http import FileResponse, Http404, HttpResponseForbidden
-from django.shortcuts import redirect, render
+from django.core.exceptions import PermissionDenied
+from django.http import FileResponse
+from django.shortcuts import (get_object_or_404, get_list_or_404, redirect,
+    render)
 from django.views.decorators.http import require_http_methods
 
-from rest_framework.generics import (ListCreateAPIView, RetrieveUpdateAPIView)
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateAPIView
 
 from main.forms import ChangeAvatarForm
-from main.models import Author, Book, Genre
+from main.models import Author, Book, Genre, User
 from main.serializers import AuthorSerializer, BookSerializer, GenreSerializer
 
 class AuthorDetail(RetrieveUpdateAPIView):
@@ -38,8 +40,10 @@ class GenreList(ListCreateAPIView):
 @require_http_methods(['GET'])
 def avatar_get(request, pk):
     user = request.user
-    if user.id != pk and not user.is_staff:
-        return HttpResponseForbidden()
+    if user.is_staff and user.id != pk:
+        user = get_object_or_404(User, pk=pk)
+    if user.id != pk:
+        raise PermissionDenied('Permission denied')
     if settings.DEBUG:
         if user.avatar:
             return FileResponse(user.avatar)
@@ -66,15 +70,12 @@ def avatar_change(request):
 
 @require_http_methods(["GET"])
 def book_detail(request, pk):
-    try:
-        book = Book.objects.get(id=pk)
-    except Book.DoesNotExist:
-        raise Http404("There is no such book unfortunately")
+    book = get_object_or_404(Book, pk=pk)
     return render(request, 'book.html', {'book': book})
 
 @require_http_methods(["GET"])
 def book_list(request):
-    return render(request, 'books.html', {'books': Book.objects.all()})
+    return render(request, 'books.html', {'books': get_list_or_404(Book)})
 """
 curl -X POST -H "Content-Type: application/json" -d '{
     "title": "Основы математического анализа",

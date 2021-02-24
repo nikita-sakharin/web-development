@@ -31,6 +31,6 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(template_name='logout.html'),
         name='logout'),
     path('social/', include('social_django.urls', namespace='social')), # name ?
-    path('user/avatar/', avatar_get, name='avatar'),
+    path('user/avatar/<int:pk>', avatar_get, name='avatar'),
     path('user/avatar_change/', avatar_change),
 ]

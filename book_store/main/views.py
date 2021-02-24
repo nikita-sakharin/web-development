@@ -1,8 +1,7 @@
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
-from django.http import FileResponse, Http404, HttpResponseRedirect
-from django.shortcuts import render
-from django.urls import reverse
+from django.http import FileResponse, Http404
+from django.shortcuts import redirect, render
 from django.views.decorators.http import require_http_methods
 
 from rest_framework.generics import (ListCreateAPIView, RetrieveUpdateAPIView)
@@ -37,12 +36,14 @@ class GenreList(ListCreateAPIView):
 
 @login_required
 @require_http_methods(['GET'])
-def avatar_get(request):
+def avatar_get(request, pk):
+    if request.user.id != pk:
+        return
     if settings.DEBUG:
         avatar = request.user.avatar
         if avatar:
             return FileResponse(avatar)
-        return HttpResponseRedirect(settings.STATIC_URL + 'images/default_avatar.png')
+        return redirect(settings.STATIC_URL + 'images/default_avatar.png')
     else:
         pass
 
@@ -58,7 +59,7 @@ def avatar_change(request):
             avatar.name += '.' + avatar.content_type.split('/')[-1]
             user.avatar = avatar
             user.save()
-            return HttpResponseRedirect(reverse('home'))
+            return redirect('home')
     else:
         form = ChangeAvatarForm()
     return render(request, 'avatar_change.html', {'form': form})

@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
-from django.http import FileResponse, Http404
+from django.http import FileResponse, Http404, HttpResponseForbidden
 from django.shortcuts import redirect, render
 from django.views.decorators.http import require_http_methods
 
@@ -37,12 +37,12 @@ class GenreList(ListCreateAPIView):
 @login_required
 @require_http_methods(['GET'])
 def avatar_get(request, pk):
-    if request.user.id != pk:
-        return
+    user = request.user
+    if user.id != pk and not user.is_staff:
+        return HttpResponseForbidden()
     if settings.DEBUG:
-        avatar = request.user.avatar
-        if avatar:
-            return FileResponse(avatar)
+        if user.avatar:
+            return FileResponse(user.avatar)
         return redirect(settings.STATIC_URL + 'images/default_avatar.png')
     else:
         pass

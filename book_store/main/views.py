@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
-from django.http import FileResponse, Http404, HttpResponseForbidden
+from django.http import (FileResponse, Http404, HttpResponse,
+    HttpResponseForbidden)
 from django.shortcuts import (get_object_or_404, get_list_or_404, redirect,
     render)
 from django.views.decorators.http import require_http_methods
@@ -46,6 +47,9 @@ def avatars(request, pk, ext):
     if not user.avatar.name.endswith(ext):
         raise Http404('404 Not Found')
     if user.avatar:
+        response = HttpResponse()
+        response['X-Accel-Redirect'] = '/protectedMedia/' + request.path
+        return response
         return FileResponse(user.avatar)
 
 @login_required

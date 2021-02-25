@@ -48,7 +48,7 @@ def avatars(request, pk, ext):
         raise Http404('404 Not Found')
     if user.avatar:
         response = HttpResponse()
-        response['Content-Type'] = ''
+        response['Content-Type'] = 'image/' + ext
         response['X-Accel-Redirect'] = '/protected/' + user.avatar.name
         return response
         return FileResponse(user.avatar)

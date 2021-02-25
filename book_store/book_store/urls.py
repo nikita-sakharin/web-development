@@ -15,17 +15,18 @@ Including another URLconf
 """
 from django.contrib.admin import site
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import include, path
 from django.views.generic.base import TemplateView
+
+from main.views import avatars, avatar_change
 
 urlpatterns = [
     path('', include('main.urls'), name='main'),
     path('', login_required(TemplateView.as_view(template_name='home.html')),
         name='home'),
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('accounts/avatars/<int:pk>.<str:ext>', avatars),
+    path('accounts/avatar_change/', avatar_change),
     path('admin/', site.urls),
-    path('login/', LoginView.as_view(template_name='login.html'), name='login'),
-    path('logout/', LogoutView.as_view(template_name='logout.html'),
-        name='logout'),
-    path('social/', include('social_django.urls', namespace='social')), # name ?
+    path('social/', include('social_django.urls', namespace='social')),
 ]

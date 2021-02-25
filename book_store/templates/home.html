@@ -1,18 +1,18 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}Book-store home{% endblock %}
 
 {% block content %}
 <h1>Book-store home</h1>
 
-{% if user.is_authenticated %}
-  {{ user.username }}
-  <button>
-    <a href="{% url 'logout' %}">logout</a>
-  </button>
+{{ user.username }}<br/>
+{% if user.avatar %}
+  <img alt="Avatar" src="/accounts/{{ user.avatar.name }}" width="10%" height="10%"/>
 {% else %}
-  <button>
-    <a href="{% url 'login' %}">login</a>
-  </button>
-{% endif %}
+  <img alt="Avatar" src="{% static "images/default_avatar.png" %}" width="10%" height="10%"/>
+{% endif %}<br/>
+<button>
+  <a href="{% url 'logout' %}">Logout</a>
+</button>
 {% endblock %}

@@ -1,11 +1,13 @@
+from os.path import splitext
+
 from django.contrib.auth.models import AbstractUser
 from django.db.models import (CharField, CheckConstraint, DateField,
     DecimalField, F, ImageField, ManyToManyField, Model, Q, UniqueConstraint)
 from django.db.models.functions import Now, Trunc
 from django.urls import reverse
 
-def get_avatar_path(instance, _):
-    return f"avatars/{instance.id}"
+def get_avatar_path(instance, filename):
+    return f"avatars/{instance.id}{splitext(filename)[1]}"
 
 class User(AbstractUser):
     avatar = ImageField(upload_to=get_avatar_path, max_length=255, null=True,

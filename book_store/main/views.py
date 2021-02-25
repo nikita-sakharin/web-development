@@ -43,7 +43,7 @@ def avatars(request, pk, ext):
             return HttpResponseForbidden('<!DOCTYPE html><html lang="en"><body>'
                 '<h1>403 Forbidden</h1></body></html>')
         user = get_object_or_404(User, pk=pk)
-    if not user.avatar.name.endswith(ext)
+    if not user.avatar.name.endswith(ext):
         raise Http404('404 Not Found')
     if user.avatar:
         return FileResponse(user.avatar)

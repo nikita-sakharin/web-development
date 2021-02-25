@@ -51,7 +51,7 @@ def avatars(request, pk, ext):
         response['Content-Type'] = 'image/' + ext
         response['X-Accel-Redirect'] = '/protected/' + user.avatar.name
         return response
-        return FileResponse(user.avatar)
+        # return FileResponse(user.avatar)
 
 @login_required
 @require_http_methods(['GET', 'POST'])

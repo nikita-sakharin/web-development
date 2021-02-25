@@ -28,5 +28,5 @@ urlpatterns = [
     path('accounts/avatars/<int:pk>.<str:ext>', avatars),
     path('accounts/avatar_change/', avatar_change),
     path('admin/', site.urls),
-    path('social/', include('social_django.urls', namespace='social')), # name ?
+    path('social/', include('social_django.urls', namespace='social')),
 ]

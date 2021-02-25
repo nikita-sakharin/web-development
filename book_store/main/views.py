@@ -41,15 +41,15 @@ class GenreList(ListCreateAPIView):
 @require_http_methods(['GET'])
 def avatars(request, pk, ext):
     user = request.user
-    if user.is_staff and user.id != pk:
-        user = get_object_or_404(User, pk=pk)
     if user.id != pk:
-        return HttpResponseForbidden('<!DOCTYPE html><html lang="en"><body><h1>'
-            '403 Forbidden</h1></body></html>')
+        if not user.is_staff:
+            return HttpResponseForbidden('<!DOCTYPE html><html lang="en"><body>'
+                '<h1>403 Forbidden</h1></body></html>')
+        user = get_object_or_404(User, pk=pk)
+    if not user.avatar.name.endswith(ext)
+        raise Http404
     if user.avatar:
         return FileResponse(user.avatar)
-
-    return redirect(settings.STATIC_URL + 'images/default_avatar.png')
     if settings.DEBUG:
         pass
 

@@ -47,7 +47,7 @@ def avatars(request, pk, ext):
     if not user.avatar.name.endswith('.' + ext):
         raise Http404('404 Not Found')
     if user.avatar:
-        response = HttpResponse(status=200)
+        response = HttpResponse
         response['Content-Type'] = ''
         response['X-Accel-Redirect'] = '/protected/' + user.avatar.name
         return response

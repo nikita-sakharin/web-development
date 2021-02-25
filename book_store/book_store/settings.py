@@ -132,7 +132,7 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
+# DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 AWS_ACCESS_KEY_ID = '<access_key_id>'

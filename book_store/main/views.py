@@ -47,11 +47,9 @@ def avatars(request, pk, ext):
                 '<h1>403 Forbidden</h1></body></html>')
         user = get_object_or_404(User, pk=pk)
     if not user.avatar.name.endswith(ext)
-        raise Http404
+        raise Http404('404 Not Found')
     if user.avatar:
         return FileResponse(user.avatar)
-    if settings.DEBUG:
-        pass
 
 @login_required
 @require_http_methods(['GET', 'POST'])

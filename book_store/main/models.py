@@ -11,7 +11,7 @@ def get_avatar_path(instance, filename):
 
 class User(AbstractUser):
     def get_avatar_absolute_url(self):
-        ext = splitext(self.avatar.name)[1][-1:]
+        ext = splitext(self.avatar.name)[1][1:]
         return reverse('avatar', args=[str(self.id), ext])
 
     avatar = ImageField(upload_to=get_avatar_path, max_length=255, null=True,

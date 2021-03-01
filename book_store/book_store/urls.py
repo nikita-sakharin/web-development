@@ -25,7 +25,7 @@ urlpatterns = [
     path('', login_required(TemplateView.as_view(template_name='home.html')),
         name='home'),
     path('accounts/', include('django.contrib.auth.urls')),
-    path('accounts/avatars/<int:pk>.<str:ext>', avatars),
+    path('accounts/avatars/<int:pk>.<str:ext>', avatars, name='avatar'),
     path('accounts/avatar_change/', avatar_change),
     path('admin/', site.urls),
     path('social/', include('social_django.urls', namespace='social')),

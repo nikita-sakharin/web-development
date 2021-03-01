@@ -8,7 +8,7 @@
 
 {{ user.username }}<br/>
 {% if user.avatar %}
-  <img alt="Avatar" src="/accounts/{{ user.avatar.name }}" width="10%" height="10%"/>
+  <img alt="Avatar" src="{{ user.get_avatar_absolute_url }}" width="10%" height="10%"/>
 {% else %}
   <img alt="Avatar" src="{% static "images/default_avatar.png" %}" width="10%" height="10%"/>
 {% endif %}<br/>

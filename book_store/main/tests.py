@@ -10,7 +10,10 @@ from main.serializers import AuthorSerializer, BookSerializer, GenreSerializer
 class AuthorFaker(Factory):
     class Meta:
         model = Author
-    name = Faker('word', locale=getdefaultlocale()[0])
+    name = Faker('full_name', locale=getdefaultlocale()[0])
+    birth_date = DateField(null=False, blank=False, db_column='birth_date',
+        verbose_name='Дата рождения')
+    death_date =
 
 class GenreFaker(Factory):
     class Meta:

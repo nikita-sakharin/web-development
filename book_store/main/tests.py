@@ -24,10 +24,9 @@ class BookFaker(Factory):
         model = Book
 
     title = Faker('sentence', nb_words=3, locale=getdefaultlocale()[0])
-    pub_year = Faker('year')
-    isbn = Faker('isbn', separator='')
+    pub_year = Faker('date', pattern='%Y-01-01')
+    isbn = Faker('isbn13', separator='')
     price = Faker('pydecimal', positive=True)
-    # genres = SubFactory(GenreFaker)
 
     @post_generation
     def genres(self, create, extracted, **kwargs):
@@ -43,12 +42,11 @@ class BookAPITest(TestCase):
         self.client = Client()
         self.books = BookFaker.create_batch(self.MAX_MOVIES_COUNT)
         for book in self.books:
-            print(book.title, book.pub_year, book.genres)
-            book.genre.save()
+            # book.genre.save()
             book.save()
 
     def test_books_get(self):
-        response = self.client.get('/books/api/')
+        response = self.client.get('/api/books/')
         self.assertEqual(Book.objects.count(), self.MAX_MOVIES_COUNT)
         self.assertEqual(response.status_code, 200)
         expected = BookSerializer(self.books, many=True).data

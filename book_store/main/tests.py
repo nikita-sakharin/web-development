@@ -10,10 +10,9 @@ from main.serializers import AuthorSerializer, BookSerializer, GenreSerializer
 class AuthorFaker(Factory):
     class Meta:
         model = Author
-    name = Faker('full_name', locale=getdefaultlocale()[0])
-    birth_date = DateField(null=False, blank=False, db_column='birth_date',
-        verbose_name='Дата рождения')
-    death_date =
+    full_name = Faker('full_name', locale=getdefaultlocale()[0])
+    birth_date = Faker('full_name', locale=getdefaultlocale()[0])
+    death_date = Faker('full_name', locale=getdefaultlocale()[0])
 
 class GenreFaker(Factory):
     class Meta:
@@ -22,28 +21,28 @@ class GenreFaker(Factory):
 
 class BookFaker(Factory):
     class Meta:
-        model = Movie
+        model = Book
 
     title = Faker('sentence', nb_words=3, locale=getdefaultlocale()[0])
     year = Faker('year')
     genre = SubFactory(GenreFaker)
 
-class MovieAPITest(TestCase):
+class BookAPITest(TestCase):
     MAX_MOVIES_COUNT = 20
 
     def setUp(self):
         self.client = Client()
-        self.movies = MovieFaker.create_batch(self.MAX_MOVIES_COUNT)
-        for movie in self.movies:
-            print(movie.title, movie.year, movie.genre)
-            movie.genre.save()
-            movie.save()
+        self.books = BookFaker.create_batch(self.MAX_MOVIES_COUNT)
+        for book in self.books:
+            print(book.title, book.year, book.genre)
+            book.genre.save()
+            book.save()
 
-    def test_movies_get(self):
-        response = self.client.get('/api/movies/')
-        self.assertEqual(Movie.objects.count(), self.MAX_MOVIES_COUNT)
+    def test_books_get(self):
+        response = self.client.get('/books/api/')
+        self.assertEqual(Book.objects.count(), self.MAX_MOVIES_COUNT)
         self.assertEqual(response.status_code, 200)
-        expected = {'movies': MovieSerializer(self.movies, many=True).data}
+        expected = BookSerializer(self.books, many=True).data
         self.assertEqual(response.json(), expected)
 
     def tearDown(self):

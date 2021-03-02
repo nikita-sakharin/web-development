@@ -2,7 +2,7 @@ from locale import getdefaultlocale
 
 from django.test import Client, TestCase
 
-from factory import Factory, Faker, SubFactory
+from factory import Factory, Faker, SubFactory, post_generation
 
 from main.models import Author, Book, Genre
 from main.serializers import AuthorSerializer, BookSerializer, GenreSerializer
@@ -27,7 +27,14 @@ class BookFaker(Factory):
     pub_year = Faker('year')
     isbn = Faker('isbn', separator='')
     price = Faker('pydecimal', positive=True)
-    genres = SubFactory(GenreFaker)
+    # genres = SubFactory(GenreFaker)
+
+    @post_generation
+    def groups(self, create, extracted, **kwargs):
+        if not create or not extracted:
+            return
+        for genre in extracted:
+            self.genres.add(genre)
 
 class BookAPITest(TestCase):
     MAX_MOVIES_COUNT = 20

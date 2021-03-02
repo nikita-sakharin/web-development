@@ -28,6 +28,13 @@ class BookFaker(Factory):
     price = Faker('pydecimal', positive=True)
 
     @post_generation
+    def authors(self, create, extracted, **kwargs):
+        if not create or not extracted:
+            return
+        for genre in extracted:
+            self.authors.add(genre)
+
+    @post_generation
     def genres(self, create, extracted, **kwargs):
         if not create or not extracted:
             return
@@ -37,10 +44,15 @@ class BookFaker(Factory):
 class BookAPITest(TestCase):
     def setUp(self):
         self.client = Client()
-        self.books = BookFaker.create_batch(100)
-        for book in self.books:
+        self.books = []
+        for _ in range(100):
+            author = AuthorFaker.create()
+            genre = GenreFaker.create()
+            book = BookFaker.create(authors=[author], genres=[genre])
             book.pub_year = book.pub_year.replace(day=1, month=1)
-            # book.genre.save()
+            self.books.append(book)
+            # book.authors.save()
+            # book.genres.save()
             book.save()
 
     def test_books_get(self):

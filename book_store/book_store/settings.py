@@ -86,6 +86,9 @@ DATABASES = {
         'PASSWORD': 'IX#xZ&5kojzu!*hQyVRo',
         'HOST': '127.0.0.1',
         'PORT': '5432',
+        'TEST': {
+            'NAME': 'test_book_store_database',
+        },
     }
 }
 

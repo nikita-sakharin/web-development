@@ -12,7 +12,6 @@ class AuthorFaker(Factory):
         model = Author
     full_name = Faker('name', locale=getdefaultlocale()[0])
     birth_date = Faker('date_of_birth')
-    death_date = None
 
 class GenreFaker(Factory):
     class Meta:

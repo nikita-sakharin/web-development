@@ -24,7 +24,9 @@ class BookFaker(Factory):
         model = Book
 
     title = Faker('sentence', nb_words=3, locale=getdefaultlocale()[0])
-    year = Faker('year')
+    pub_year = Faker('year')
+    isbn = Faker('isbn', separator='')
+    price = Faker('pydecimal', positive=True)
     genre = SubFactory(GenreFaker)
 
 class BookAPITest(TestCase):

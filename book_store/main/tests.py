@@ -27,7 +27,7 @@ class BookFaker(Factory):
     pub_year = Faker('year')
     isbn = Faker('isbn', separator='')
     price = Faker('pydecimal', positive=True)
-    genre = SubFactory(GenreFaker)
+    genres = SubFactory(GenreFaker)
 
 class BookAPITest(TestCase):
     MAX_MOVIES_COUNT = 20

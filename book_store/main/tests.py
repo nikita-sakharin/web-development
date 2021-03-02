@@ -10,9 +10,9 @@ from main.serializers import AuthorSerializer, BookSerializer, GenreSerializer
 class AuthorFaker(Factory):
     class Meta:
         model = Author
-    full_name = Faker('full_name', locale=getdefaultlocale()[0])
-    birth_date = Faker('full_name', locale=getdefaultlocale()[0])
-    death_date = Faker('full_name', locale=getdefaultlocale()[0])
+    full_name = Faker('name', locale=getdefaultlocale()[0])
+    birth_date = Faker('date_of_birth')
+    death_date = None
 
 class GenreFaker(Factory):
     class Meta:

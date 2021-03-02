@@ -43,7 +43,7 @@ class BookAPITest(TestCase):
         self.client = Client()
         self.books = BookFaker.create_batch(self.MAX_MOVIES_COUNT)
         for book in self.books:
-            print(book.title, book.year, book.genre)
+            print(book.title, book.pub_year, book.genres)
             book.genre.save()
             book.save()
 

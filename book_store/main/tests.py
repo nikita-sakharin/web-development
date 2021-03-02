@@ -31,8 +31,8 @@ class BookFaker(Factory):
     def authors(self, create, extracted, **kwargs):
         if not create or not extracted:
             return
-        for genre in extracted:
-            self.authors.add(genre)
+        for author in extracted:
+            self.authors.add(author)
 
     @post_generation
     def genres(self, create, extracted, **kwargs):

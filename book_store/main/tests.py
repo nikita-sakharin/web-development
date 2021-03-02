@@ -30,7 +30,7 @@ class BookFaker(Factory):
     # genres = SubFactory(GenreFaker)
 
     @post_generation
-    def groups(self, create, extracted, **kwargs):
+    def genres(self, create, extracted, **kwargs):
         if not create or not extracted:
             return
         for genre in extracted:

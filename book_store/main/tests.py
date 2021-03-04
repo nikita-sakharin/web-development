@@ -8,7 +8,7 @@ import faker
 from main.models import Author, Book, Genre
 from main.serializers import AuthorSerializer, BookSerializer, GenreSerializer
 
-UNIQUE_FAKER = faker.Faker(locale=getdefaultlocale()[0]).unique 
+UNIQUE_FAKER = faker.Faker(locale=getdefaultlocale()[0]).unique
 
 class AuthorFaker(Factory):
     class Meta:

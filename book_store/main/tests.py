@@ -47,7 +47,7 @@ class BookFaker(Factory):
         self.save()
         for genre in extracted:
             self.genres.add(genre)
-from django.core.files.storage import FileSystemStorage
+
 class BookAPITest(TestCase):
     def setUp(self):
         self.client = Client()

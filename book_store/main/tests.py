@@ -8,7 +8,7 @@ import faker
 
 from book_store.settings import DEFAULT_FILE_STORAGE
 from main.models import Author, Book, Genre, User
-from main.serializers import AuthorSerializer, BookSerializer, GenreSerializer
+from main.serializers import BookSerializer
 
 UNIQUE_FAKER = faker.Faker(locale=getdefaultlocale()[0]).unique
 

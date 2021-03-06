@@ -1,10 +1,12 @@
 from locale import getdefaultlocale
+from unittest.mock import patch
 
 from django.test import Client, TestCase
 
 from factory import Factory, Faker, Sequence, SubFactory, post_generation
 import faker
 
+from book_store.settings import DEFAULT_FILE_STORAGE
 from main.models import Author, Book, Genre, User
 from main.serializers import AuthorSerializer, BookSerializer, GenreSerializer
 
@@ -45,12 +47,12 @@ class BookFaker(Factory):
         self.save()
         for genre in extracted:
             self.genres.add(genre)
-
+from django.core.files.storage import FileSystemStorage
 class BookAPITest(TestCase):
     def setUp(self):
         self.client = Client()
-        user = User.objects.get_or_create(username='test_user')[0]
-        self.client.force_login(user)
+        self.user = User.objects.get_or_create(username='test_user')[0]
+        self.client.force_login(self.user)
         self.books = []
         for _ in range(100):
             author = AuthorFaker.create()
@@ -60,11 +62,16 @@ class BookAPITest(TestCase):
             book = BookFaker.create(authors=[author], genres=[genre])
             self.books.append(book)
 
-    def test_avatar_change(self):
+    @patch(DEFAULT_FILE_STORAGE + '.save')
+    def test_avatar_change(self, mock_save):
+        avatar = F'{self.user.id}.png'
+        mock_save.return_value = avatar
         with open('main/static/images/default_avatar.png', 'rb') as file:
             response = self.client.post('/accounts/avatar_change/',
                 {'avatar': file})
         self.assertEqual(response.status_code, 302)
+        self.assertEqual(User.objects.get(pk=self.user.id).avatar, avatar)
+        mock_save.assert_called_once()
 
     def test_book_detail(self):
         for book in self.books:

@@ -1,10 +1,12 @@
 from locale import getdefaultlocale
 from unittest.mock import patch
 
+from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from django.test import Client, TestCase
 
 from factory import Factory, Faker, Sequence, post_generation
 import faker
+from selenium.webdriver.firefox.webdriver import WebDriver
 
 from book_store.settings import DEFAULT_FILE_STORAGE
 from main.models import Author, Book, Genre, User
@@ -88,3 +90,28 @@ class BookAPITest(TestCase):
 
     def tearDown(self):
         pass
+
+class SeleniumTest(StaticLiveServerTestCase):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.selenium = WebDriver()
+        cls.selenium.implicitly_wait(50)
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.selenium.quit()
+        super().tearDownClass()
+
+    def test_login(self):
+        user = User.objects.get_or_create(username='test_user')[0]
+        user.set_password('0123456789')
+        user.save()
+
+        self.selenium.get(self.live_server_url + '/accounts/login/')
+        username_input = self.selenium.find_element_by_name('username')
+        username_input.send_keys('test_user')
+        password_input = self.selenium.find_element_by_name('password')
+        password_input.send_keys('0123456789')
+        # self.selenium.find_element_by_xpath('//input[@value="Login"]').click()
+        self.selenium.find_element_by_xpath('//button').click()

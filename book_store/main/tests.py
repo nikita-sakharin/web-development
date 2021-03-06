@@ -3,6 +3,7 @@ from unittest.mock import patch
 
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from django.test import Client, TestCase
+from django.urls import reverse
 
 from factory import Factory, Faker, Sequence, post_generation
 import faker
@@ -74,6 +75,7 @@ class BookAPITest(TestCase):
         self.assertEqual(response.status_code, 302)
         self.assertEqual(User.objects.get(pk=self.user.id).avatar, avatar)
         mock_save.assert_called_once()
+        self.assertEqual(mock_save.call_args.args[0], F'avatars/{avatar}')
 
     def test_book_detail(self):
         for book in self.books:
@@ -104,14 +106,15 @@ class SeleniumTest(StaticLiveServerTestCase):
         super().tearDownClass()
 
     def test_login(self):
+        password = '0123456789ABCDEF'
         user = User.objects.get_or_create(username='test_user')[0]
-        user.set_password('0123456789')
+        user.set_password(password)
         user.save()
 
-        self.selenium.get(self.live_server_url + '/accounts/login/')
+        self.selenium.get(self.live_server_url + reverse('login'))
         username_input = self.selenium.find_element_by_name('username')
-        username_input.send_keys('test_user')
+        username_input.send_keys(user.username)
         password_input = self.selenium.find_element_by_name('password')
-        password_input.send_keys('0123456789')
+        password_input.send_keys(password)
         # self.selenium.find_element_by_xpath('//input[@value="Login"]').click()
         self.selenium.find_element_by_xpath('//button').click()

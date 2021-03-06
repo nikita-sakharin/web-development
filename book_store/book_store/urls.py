@@ -18,15 +18,15 @@ from django.contrib.auth.decorators import login_required
 from django.urls import include, path
 from django.views.generic.base import TemplateView
 
-from main.views import avatars, avatar_change
+from main.views import avatar_change, avatars
 
 urlpatterns = [
     path('', include('main.urls'), name='main'),
     path('', login_required(TemplateView.as_view(template_name='home.html')),
         name='home'),
     path('accounts/', include('django.contrib.auth.urls')),
-    path('accounts/avatars/<int:pk>.<str:ext>', avatars, name='avatar'),
     path('accounts/avatar_change/', avatar_change),
+    path('accounts/avatars/<int:pk>.<str:ext>', avatars, name='avatar'),
     path('admin/', site.urls),
     path('social/', include('social_django.urls', namespace='social')),
 ]

@@ -5,7 +5,7 @@ from django.test import Client, TestCase
 from factory import Factory, Faker, Sequence, SubFactory, post_generation
 import faker
 
-from main.models import Author, Book, Genre
+from main.models import Author, Book, Genre, User
 from main.serializers import AuthorSerializer, BookSerializer, GenreSerializer
 
 UNIQUE_FAKER = faker.Faker(locale=getdefaultlocale()[0]).unique
@@ -49,6 +49,8 @@ class BookFaker(Factory):
 class BookAPITest(TestCase):
     def setUp(self):
         self.client = Client()
+        user = User.objects.get_or_create(username='test_user')[0]
+        self.client.force_login(user)
         self.books = []
         for _ in range(100):
             author = AuthorFaker.create()
@@ -57,6 +59,12 @@ class BookAPITest(TestCase):
             genre.save()
             book = BookFaker.create(authors=[author], genres=[genre])
             self.books.append(book)
+
+    def test_avatar_change(self):
+        with open('main/static/images/default_avatar.png', 'rb') as file:
+            response = self.client.post('/accounts/avatar_change/',
+                {'avatar': file})
+        self.assertEqual(response.status_code, 302)
 
     def test_book_detail(self):
         for book in self.books:

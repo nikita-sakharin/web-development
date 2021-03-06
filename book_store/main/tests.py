@@ -3,7 +3,7 @@ from unittest.mock import patch
 
 from django.test import Client, TestCase
 
-from factory import Factory, Faker, Sequence, SubFactory, post_generation
+from factory import Factory, Faker, Sequence, post_generation
 import faker
 
 from book_store.settings import DEFAULT_FILE_STORAGE

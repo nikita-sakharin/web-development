@@ -117,7 +117,7 @@ class SeleniumTest(StaticLiveServerTestCase):
     def setUpClass(cls):
         super().setUpClass()
         cls.selenium = WebDriver()
-        cls.selenium.implicitly_wait(50)
+        cls.selenium.implicitly_wait(10)
 
     @classmethod
     def tearDownClass(cls):

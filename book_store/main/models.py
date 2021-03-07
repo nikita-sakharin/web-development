@@ -6,17 +6,6 @@ from django.db.models import (CharField, CheckConstraint, DateField,
 from django.db.models.functions import Now, Trunc
 from django.urls import reverse
 
-def get_avatar_path(instance, filename):
-    return f"avatars/{instance.id}{splitext(filename)[1]}"
-
-class User(AbstractUser):
-    def get_avatar_absolute_url(self):
-        ext = splitext(self.avatar.name)[1][1:]
-        return reverse('avatar', args=[str(self.id), ext])
-
-    avatar = ImageField(upload_to=get_avatar_path, max_length=255, null=True,
-        blank=True, db_column='avatar', verbose_name='Аватар пользователя')
-
 class Author(Model):
     full_name = CharField(max_length=255, null=False, blank=False,
         db_column='full_name', verbose_name='Полное имя автора')
@@ -104,6 +93,17 @@ class Book(Model):
         ]
         verbose_name = 'книга'
         verbose_name_plural = 'книги'
+
+def get_avatar_path(instance, filename):
+    return f"avatars/{instance.id}{splitext(filename)[1]}"
+
+class User(AbstractUser):
+    def get_avatar_absolute_url(self):
+        ext = splitext(self.avatar.name)[1][1:]
+        return reverse('avatar', args=[str(self.id), ext])
+
+    avatar = ImageField(upload_to=get_avatar_path, max_length=255, null=True,
+        blank=True, db_column='avatar', verbose_name='Аватар пользователя')
 """
 from main.models import Author, Book, Genre
 

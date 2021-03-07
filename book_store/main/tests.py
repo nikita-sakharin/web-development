@@ -136,3 +136,4 @@ class SeleniumTest(StaticLiveServerTestCase):
         password_input = self.selenium.find_element_by_name('password')
         password_input.send_keys(password)
         self.selenium.find_element_by_xpath('//button[@type="submit"]').click()
+        self.assertEqual(self.selenium.current_url, self.live_server_url + '/')

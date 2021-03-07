@@ -63,6 +63,7 @@ class BookAPITest(TestCase):
             genre = GenreFaker.create()
             genre.save()
             book = BookFaker.create(authors=[author], genres=[genre])
+            book.save()
             self.books.append(book)
 
     @patch(DEFAULT_FILE_STORAGE + '.save')
@@ -79,22 +80,39 @@ class BookAPITest(TestCase):
         self.assertEqual(mock_save.call_args.args[0], F'avatars/{avatar}')
         self.assertEqual(mock_save.call_args.kwargs, {'max_length': 255})
 
-    def test_book_detail(self):
+    def test_book_detail_get(self):
         for book in self.books:
             response = self.client.get(F'/api/books/{book.id}/')
             self.assertEqual(response.status_code, 200)
-            data = BookSerializer(book).data
-            self.assertCountEqual(response.json(), data)
+            expected = BookSerializer(book).data
+            self.assertCountEqual(response.json(), expected)
 
-    def test_book_list(self):
+    def test_book_list_get(self):
         response = self.client.get('/api/books/')
         self.assertEqual(response.status_code, 200)
-        data = BookSerializer(self.books, many=True).data
-        self.assertCountEqual(response.json(), data)
+        expected = BookSerializer(self.books, many=True).data
+        self.assertCountEqual(response.json(), expected)
+
+    def test_book_list_post(self):
+        book = BookFaker.create()
+        data = BookSerializer(book).data
+        del data['id']
+        author = AuthorFaker.create()
+        author.save()
+        data['authors'].append(author.id)
+        genre = GenreFaker.create()
+        genre.save()
+        data['genres'].append(genre.id)
+        response = self.client.post('/api/books/', data)
+        print(response.data)
+        self.assertEqual(response.status_code, 201)
+        expected = BookSerializer(self.books + [book], many=True).data
+        result = BookSerializer(Book.objects.all(), many=True).data
+        self.assertCountEqual(result, expected)
 
     def tearDown(self):
         pass
-
+"""
 class SeleniumTest(StaticLiveServerTestCase):
     @classmethod
     def setUpClass(cls):
@@ -119,4 +137,4 @@ class SeleniumTest(StaticLiveServerTestCase):
         password_input = self.selenium.find_element_by_name('password')
         password_input.send_keys(password)
         # self.selenium.find_element_by_xpath('//input[@value="Login"]').click()
-        self.selenium.find_element_by_xpath('//button').click()
+        self.selenium.find_element_by_xpath('//button').click()"""

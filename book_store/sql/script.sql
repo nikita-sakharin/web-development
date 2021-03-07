@@ -1,10 +1,14 @@
 -- sudo -u postgres psql
 DROP DATABASE IF EXISTS book_store_database;
+DROP DATABASE IF EXISTS test_book_store_database;
 DROP USER IF EXISTS book_store_user;
 
 -- Just for examples. Don't save user and password in git.
 CREATE USER book_store_user PASSWORD 'IX#xZ&5kojzu!*hQyVRo';
 CREATE DATABASE book_store_database WITH
+    OWNER book_store_user
+    ENCODING 'UTF8';
+CREATE DATABASE test_book_store_database WITH
     OWNER book_store_user
     ENCODING 'UTF8';
 

@@ -66,6 +66,9 @@ class BookAPITest(TestCase):
             book.save()
             self.books.append(book)
 
+    def tearDown(self):
+        pass
+
     @patch(DEFAULT_FILE_STORAGE + '.save')
     def test_avatar_change(self, mock_save):
         avatar = F'{self.user.id}.png'
@@ -108,9 +111,6 @@ class BookAPITest(TestCase):
         expected = BookSerializer(self.books, many=True).data + [response.data]
         result = BookSerializer(Book.objects.all(), many=True).data
         self.assertCountEqual(result, expected)
-
-    def tearDown(self):
-        pass
 """
 class SeleniumTest(StaticLiveServerTestCase):
     @classmethod

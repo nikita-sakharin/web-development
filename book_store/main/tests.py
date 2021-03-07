@@ -1,6 +1,7 @@
 from locale import getdefaultlocale
 from unittest.mock import patch
 
+from django.conf import settings
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from django.test import Client, TestCase
 from django.urls import reverse
@@ -9,7 +10,6 @@ from factory import Factory, Faker, Sequence, post_generation
 import faker
 from selenium.webdriver.firefox.webdriver import WebDriver
 
-from book_store.settings import DEFAULT_FILE_STORAGE
 from main.models import Author, Book, Genre, User
 from main.serializers import BookSerializer
 
@@ -69,7 +69,7 @@ class BookAPITest(TestCase):
     def tearDown(self):
         pass
 
-    @patch(DEFAULT_FILE_STORAGE + '.save')
+    @patch(settings.DEFAULT_FILE_STORAGE + '.save')
     def test_avatar_change(self, mock_save):
         avatar = F'{self.user.id}.png'
         mock_save.return_value = avatar
@@ -111,7 +111,7 @@ class BookAPITest(TestCase):
         expected = BookSerializer(self.books, many=True).data + [response.data]
         result = BookSerializer(Book.objects.all(), many=True).data
         self.assertCountEqual(result, expected)
-"""
+
 class SeleniumTest(StaticLiveServerTestCase):
     @classmethod
     def setUpClass(cls):
@@ -136,4 +136,4 @@ class SeleniumTest(StaticLiveServerTestCase):
         password_input = self.selenium.find_element_by_name('password')
         password_input.send_keys(password)
         # self.selenium.find_element_by_xpath('//input[@value="Login"]').click()
-        self.selenium.find_element_by_xpath('//button').click()"""
+        self.selenium.find_element_by_xpath('//button').click()

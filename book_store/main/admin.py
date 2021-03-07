@@ -2,11 +2,6 @@ from django.contrib.admin import ModelAdmin, TabularInline, site
 
 from main.models import Author, Book, Genre, User
 
-class UserAdmin(ModelAdmin):
-    pass
-
-site.register(User, UserAdmin)
-
 class AuthorAdmin(ModelAdmin):
     list_display = ('id', 'full_name', 'birth_date')
     list_filter = ('full_name', 'birth_date', 'death_date')
@@ -35,3 +30,8 @@ class BookAdmin(ModelAdmin):
     exclude = ('authors', 'genres')
 
 site.register(Book, BookAdmin)
+
+class UserAdmin(ModelAdmin):
+    pass
+
+site.register(User, UserAdmin)

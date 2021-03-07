@@ -75,7 +75,9 @@ class BookAPITest(TestCase):
         self.assertEqual(response.status_code, 302)
         self.assertEqual(User.objects.get(pk=self.user.id).avatar, avatar)
         mock_save.assert_called_once()
+        self.assertEqual(len(mock_save.call_args.args), 2)
         self.assertEqual(mock_save.call_args.args[0], F'avatars/{avatar}')
+        self.assertEqual(mock_save.call_args.kwargs, {'max_length': 255})
 
     def test_book_detail(self):
         for book in self.books:

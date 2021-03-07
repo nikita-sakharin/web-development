@@ -105,7 +105,7 @@ class BookAPITest(TestCase):
         data['genres'].append(genre.id)
         response = self.client.post('/api/books/', data)
         self.assertEqual(response.status_code, 201)
-        expected = BookSerializer(self.books + [response.data], many=True).data
+        expected = BookSerializer(self.books, many=True).data + [response.data]
         result = BookSerializer(Book.objects.all(), many=True).data
         self.assertCountEqual(result, expected)
 

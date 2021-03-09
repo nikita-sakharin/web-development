@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Users{% endblock %}
+
+{% block content %}
+<h1>Books available:</h1>
+
+{% for user in users %}
+  <div>
+    <p>{{ user.username }}</p>
+    <p>{{ user.first_name }} {{ user.last_name }}</p>
+    <p>{{ user.email }}</p>
+  </div>
+{% empty %}
+    No users matching your request.
+{% endfor %}
+{% endblock %}

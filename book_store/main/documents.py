@@ -29,7 +29,7 @@ class UserDocument(Document):
         model = User
         fields = [
             'email',
-            'first_name'
+            'first_name',
             'last_name',
             'username',
         ]

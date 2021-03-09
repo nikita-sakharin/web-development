@@ -159,3 +159,9 @@ SOCIAL_AUTH_VK_OAUTH2_KEY = '<key>'
 SOCIAL_AUTH_VK_OAUTH2_SECRET = '<secret>'
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
 SOCIAL_AUTH_VK_OAUTH2_SCOPE = ['email', 'groups', 'wall']
+
+ELASTICSEARCH_DSL = {
+    'default': {
+        'hosts': 'localhost:9200'
+    },
+}

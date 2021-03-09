@@ -7,7 +7,7 @@ from django.views.decorators.http import require_http_methods
 
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateAPIView
 
-from main.documents import BookDocument
+from main.documents import BookDocument, UserDocument
 from main.forms import ChangeAvatarForm
 from main.models import Author, Book, Genre, User
 from main.serializers import AuthorSerializer, BookSerializer, GenreSerializer
@@ -78,7 +78,19 @@ def book_detail(request, pk):
 
 @require_http_methods(["GET"])
 def book_list(request):
+    search = request.GET.get('search')
+    if search:
+        query = BookDocument.search().query('multi_match', query=search)
+        return render(request, 'books.html', {'books': query.to_queryset()})
     return render(request, 'books.html', {'books': get_list_or_404(Book)})
+
+@require_http_methods(["GET"])
+def user_list(request):
+    search = request.GET.get('search')
+    if search:
+        query = UserDocument.search().query('multi_match', query=search)
+        return render(request, 'users.html', {'users': query.to_queryset()})
+    return render(request, 'users.html', {'users': get_list_or_404(User)})
 """
 curl -X POST -H 'Content-Type: application/json' -d '{
     "title": "Основы математического анализа",

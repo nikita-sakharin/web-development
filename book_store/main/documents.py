@@ -15,8 +15,6 @@ class BookDocument(Document):
             'title',
             'pub_year',
             'isbn',
-            # 'authors__full_name',
-            # 'genres__name'
         ]
 
 @registry.register_document

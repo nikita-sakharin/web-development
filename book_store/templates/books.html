@@ -13,5 +13,7 @@
     <p>By {{ book.authors.first.full_name }}</p>
     <p>{{ book.price }} ₽</p>
   </div>
+{% empty %}
+    No books matching your request.
 {% endfor %}
 {% endblock %}

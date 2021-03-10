@@ -23,4 +23,3 @@ urlpatterns = [
     path('books/', book_list, name='books-list'),
     path('books/<int:pk>/', book_detail, name='book-detail'),
 ]
-# TODO BookSearch, BookSearchForm

@@ -3,8 +3,12 @@
 {% block title %}Users{% endblock %}
 
 {% block content %}
-<h1>Books available:</h1>
+<h1>Registered users:</h1>
 
+<form method="get" action="/users/">
+  <input name="search" size="40" type="text"/>
+  <input type="submit" value="Search"/>
+</form>
 {% for user in users %}
   <div>
     <p>{{ user.username }}</p>

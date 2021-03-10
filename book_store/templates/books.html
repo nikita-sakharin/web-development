@@ -3,11 +3,11 @@
 {% block title %}Books{% endblock %}
 
 {% block content %}
-<h1>Books available:</h1>
+<h1>Available books:</h1>
 
 <form method="get" action="/books/">
-  <input name="search" size="40" type="text">
-  <input type="submit" value="Search">
+  <input name="search" size="40" type="text"/>
+  <input type="submit" value="Search"/>
 </form>
 {% for book in books %}
   <div>

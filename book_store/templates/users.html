@@ -5,7 +5,7 @@
 {% block content %}
 <h1>Registered users:</h1>
 
-<form method="get" action="/users/">
+<form action="{% url 'users-list' %}" method="get">
   <input name="search" size="40" type="text"/>
   <input type="submit" value="Search"/>
 </form>

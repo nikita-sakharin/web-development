@@ -18,7 +18,7 @@ from django.contrib.auth.decorators import login_required
 from django.urls import include, path
 from django.views.generic.base import TemplateView
 
-from main.views import avatar_change, avatars
+from main.views import avatar_change, avatars, user_list
 
 urlpatterns = [
     path('', include('main.urls'), name='main'),
@@ -27,6 +27,7 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/avatar_change/', avatar_change),
     path('accounts/avatars/<int:pk>.<str:ext>', avatars, name='avatar'),
+    path('accounts/users/', user_list, name='users-list'),
     path('admin/', site.urls),
     path('social/', include('social_django.urls', namespace='social')),
 ]

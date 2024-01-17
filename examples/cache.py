@@ -14,7 +14,7 @@ class LRUCache:
 
     def get(self, key: str) -> str:
         if not isinstance(key, str):
-            raise TypeError("key and must be string")
+            raise TypeError("key must be string")
         if key not in self._dict:
             return ''
         value = self._dict.pop(key)
